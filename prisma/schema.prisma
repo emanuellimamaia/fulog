@@ -22,8 +22,8 @@ model Company {
   created_at DateTime  @default(now())
   updated_at DateTime  @updatedAt
   accounts   Account[]
-  Vehicle    Vehicle[]
-  Log        Log[]
+  vehicles   Vehicle[]
+  logs       Log[]
 
   @@map("companies")
 }
@@ -51,7 +51,7 @@ model Vehicle {
   type_of_fuel  String
   created_at    DateTime @default(now())
   updated_at    DateTime @updatedAt
-  Log           Log[]
+  logs          Log[]
 
   @@map("vehicles")
 }
