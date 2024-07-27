@@ -1,0 +1,74 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Company {
+  id           String  @id @default(cuid())
+  company_name String
+  cnpj         String  @unique
+  area         String?
+
+  created_at DateTime  @default(now())
+  updated_at DateTime  @updatedAt
+  accounts   Account[]
+  Vehicle    Vehicle[]
+  Log        Log[]
+
+  @@map("companies")
+}
+
+model Account {
+  id         String   @id @default(cuid())
+  company_id String
+  company    Company  @relation(fields: [company_id], references: [id])
+  username   String
+  role       String
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  @@map("accounts")
+}
+
+model Vehicle {
+  id            String   @id @default(cuid())
+  company_id    String
+  company       Company  @relation(fields: [company_id], references: [id])
+  kilometers    Int
+  brand         String
+  license_plate String
+  year          Int
+  type_of_fuel  String
+  created_at    DateTime @default(now())
+  updated_at    DateTime @updatedAt
+  Log           Log[]
+
+  @@map("vehicles")
+}
+
+model Log {
+  id                 String   @id @default(cuid())
+  company_id         String
+  company            Company  @relation(fields: [company_id], references: [id])
+  vehicle_id         String
+  vehicle            Vehicle  @relation(fields: [vehicle_id], references: [id])
+  initial_kilometers Int
+  final_kilometers   Int
+  delivered          DateTime
+  withdraw           DateTime @default(now())
+  notes              String
+  created_at         DateTime @default(now())
+  updated_at         DateTime @updatedAt
+
+  @@map("logs")
+}
