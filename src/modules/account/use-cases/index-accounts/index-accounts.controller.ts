@@ -9,6 +9,6 @@ export class IndexAccountController {
 
   @Get()
   async handle() {
-    return this.indexAccountService.execute()
+    return this.indexAccountService.execute({})
   }
 }
