@@ -1,5 +1,4 @@
 import { Controller, Get, Param } from "@nestjs/common";
-import { IndexAccountsService } from "../index-accounts/index-accounts.service";
 import { ShowAccountsService } from "./show-accounts.service";
 
 @Controller('/accounts')
