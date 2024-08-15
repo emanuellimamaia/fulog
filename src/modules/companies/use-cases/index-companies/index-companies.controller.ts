@@ -10,6 +10,6 @@ export class IndexCompaniesController {
 
   @Get()
   async handle() {
-    return this.indexCompaniesService.execute()
+    return this.indexCompaniesService.execute({})
   }
 }

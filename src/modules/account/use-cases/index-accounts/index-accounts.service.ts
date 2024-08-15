@@ -13,8 +13,7 @@ type Result = {
 export class IndexAccountsService implements UseCase<Input, Result> {
   constructor(
     @Inject('IAccountRepo')
-    private readonly accountRepo: IAccountRepo) {
-  }
+    private readonly accountRepo: IAccountRepo) { }
   async execute(input: Input): Promise<Result> {
     const result = await this.accountRepo.findAll()
     return result

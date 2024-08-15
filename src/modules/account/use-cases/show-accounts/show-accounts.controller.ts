@@ -1,5 +1,6 @@
-import { Controller, Get, Param } from "@nestjs/common";
+import { Controller, Get, NotFoundException, Param } from "@nestjs/common";
 import { ShowAccountsService } from "./show-accounts.service";
+import { AccountMapper } from "../../mappers/account.mappers";
 
 @Controller('/accounts')
 export class ShowAccountsController {
@@ -7,10 +8,16 @@ export class ShowAccountsController {
     private readonly showAccountService: ShowAccountsService
   ) { }
 
-  @Get('/id:')
+  @Get('/:id')
   async handle(
     @Param('id') id: string
   ) {
-    return this.showAccountService.execute(id)
+    const result = await this.showAccountService.execute({ id })
+    switch (result.message) {
+      case 'usuário não encontrado':
+        throw new NotFoundException(result)
+      case 'usuário encontrado':
+        return { ...result, data: AccountMapper.toDto(result.data) }
+    }
   }
 }
