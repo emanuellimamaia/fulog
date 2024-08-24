@@ -3,11 +3,11 @@ import { Entity, EntityMetadata } from "src/shared/entity"
 export type CompanyProps = {
   company_name: string
   cnpj: string
-  area: string
+  area?: string
 }
 
 export class Company extends Entity<CompanyProps> {
-  constructor(props: CompanyProps, metadata?: EntityMetadata) {
+  private constructor(props: CompanyProps, metadata?: EntityMetadata) {
     super(props, metadata)
   }
 

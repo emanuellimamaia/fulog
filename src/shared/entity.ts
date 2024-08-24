@@ -11,10 +11,12 @@ export class Entity<T> {
   private readonly _updated_at: Date
 
   constructor(props: T, metadata?: EntityMetadata) {
+
+    console.log(metadata)
     this.props = props
-    this._id = metadata.id
-    this._created_at = metadata.created_at
-    this._updated_at = metadata.updated_at
+    this._id = metadata?.id
+    this._created_at = metadata?.created_at
+    this._updated_at = metadata?.updated_at
   }
 
   get id() {

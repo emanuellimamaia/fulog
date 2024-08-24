@@ -1,5 +1,6 @@
 import { Controller, Get } from "@nestjs/common";
 import { IndexCompaniesService } from "./index-companies.service";
+import { CompanyMapper } from "../../mappers/company.mappers";
 
 
 @Controller('/companies')
@@ -10,6 +11,7 @@ export class IndexCompaniesController {
 
   @Get()
   async handle() {
-    return this.indexCompaniesService.execute()
+    const result = await this.indexCompaniesService.execute({})
+    return { ...result, data: result.data.map(CompanyMapper.toDto) }
   }
 }

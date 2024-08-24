@@ -1,4 +1,3 @@
-
 import { Account } from '../domain/account';
 import { IAccountRepo } from './account-repo.interface';
 import { Injectable } from '@nestjs/common';
@@ -13,6 +12,16 @@ export class AccountRepo implements IAccountRepo {
       this.prisma.account.count(),
       this.prisma.account.findMany({ include: { company: true } }),
     ]);
-    return { total, data: data.map((e) => AccountMapper.toDomain(e)) }
+    return { total, data: data.map((e) => AccountMapper.toDomain(e)) };
+  }
+  async findById(id: string): Promise<Account> {
+    const account = await this.prisma.account.findUnique({
+      where: { id },
+      include: { company: true },
+    });
+    if (!account) {
+      return;
+    }
+    return AccountMapper.toDomain(account);
   }
 }

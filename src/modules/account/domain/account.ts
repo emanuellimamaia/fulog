@@ -3,8 +3,8 @@ import { Entity, EntityMetadata } from "src/shared/entity"
 
 type AccountProps = {
   company: Company
-  username: String
-  role: String
+  username: string
+  role: string
 
 }
 
