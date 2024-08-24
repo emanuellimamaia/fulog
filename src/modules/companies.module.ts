@@ -5,10 +5,12 @@ import { ShowCompaniesController } from './companies/use-cases/show-companies/sh
 import { ShowCompaniesService } from './companies/use-cases/show-companies/show-companies.service';
 import { DatabaseModule } from 'src/infra/database.module';
 import { CompanyRepo } from './companies/repositories/company.repo';
+import { CreateCompanyController } from './companies/use-cases/create-company/create-company.controller';
+import { CreateCompanyService } from './companies/use-cases/create-company/create-company.service';
 
 @Module({
   imports: [DatabaseModule],
-  controllers: [IndexCompaniesController, ShowCompaniesController],
-  providers: [IndexCompaniesService, ShowCompaniesService, CompanyRepo, { provide: 'ICompanyRepo', useExisting: CompanyRepo }],
+  controllers: [IndexCompaniesController, ShowCompaniesController, CreateCompanyController],
+  providers: [IndexCompaniesService, ShowCompaniesService, CompanyRepo, { provide: 'ICompanyRepo', useExisting: CompanyRepo }, CreateCompanyService],
 })
 export class CompaniesModule { }

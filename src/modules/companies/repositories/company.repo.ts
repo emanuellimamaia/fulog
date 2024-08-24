@@ -14,4 +14,14 @@ export class CompanyRepo implements ICompanyRepo {
     ])
     return { total, data: data.map((c) => CompanyMapper.toDomain(c)) }
   }
+  async create(company: Company): Promise<Company> {
+    const result = await this.prisma.company.create({
+      data: {
+        cnpj: company.cnpj,
+        company_name: company.company_name,
+        area: company.area
+      }
+    })
+    return CompanyMapper.toDomain(result)
+  }
 }
