@@ -12,7 +12,6 @@ export class Entity<T> {
 
   constructor(props: T, metadata?: EntityMetadata) {
 
-    console.log(metadata)
     this.props = props
     this._id = metadata?.id
     this._created_at = metadata?.created_at
