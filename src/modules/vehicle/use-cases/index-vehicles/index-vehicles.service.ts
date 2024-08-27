@@ -15,8 +15,7 @@ type Result = {
 export class IndexVehiclesService implements UseCase<Input, Result> {
   constructor(
     @Inject('IVehicleRepo')
-    private readonly vehicleRepo: IVehicleRepo,
-  ) { }
+    private readonly vehicleRepo: IVehicleRepo) { }
   async execute(input: Input): Promise<Result> {
     const result = await this.vehicleRepo.findAll()
     return result

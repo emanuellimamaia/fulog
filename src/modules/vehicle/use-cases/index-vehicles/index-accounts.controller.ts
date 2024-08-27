@@ -1,5 +1,6 @@
 import { Controller, Get } from "@nestjs/common";
 import { IndexVehiclesService } from "./index-vehicles.service";
+import { VehicleMapper } from "../../mappers/vehicle-mappers";
 
 @Controller('/vehicles')
 export class IndexVehicleController {
@@ -9,6 +10,7 @@ export class IndexVehicleController {
 
   @Get()
   async handle() {
-    return this.indexVehicleService.execute({})
+    const result = await this.indexVehicleService.execute({})
+    return { ...result, data: result.data.map(VehicleMapper.toDto) }
   }
 }
