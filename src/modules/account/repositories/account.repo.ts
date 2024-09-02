@@ -24,4 +24,20 @@ export class AccountRepo implements IAccountRepo {
     }
     return AccountMapper.toDomain(account);
   }
+
+  async create(account: Account): Promise<Account> {
+
+
+    const createAccount = await this.prisma.account.create({
+      data: {
+        company_id: account.companyId,
+        username: account.username,
+        role: account.role,
+
+      },
+      include: { company: true },
+    });
+    return AccountMapper.toDomain(createAccount)
+  }
+
 }

@@ -4,9 +4,8 @@ import { CompanyMapper } from "src/modules/companies/mappers/company.mappers";
 import { AccountDto } from "../dto/account.dto";
 
 export class AccountMapper {
-  static toDomain(raw: AccountClient & { company: CompanyClient }): Account {
+  static toDomain(raw: AccountClient): Account {
     return Account.create({
-      company: raw.company && CompanyMapper.toDomain(raw.company),
       role: raw.role,
       username: raw.username
     })

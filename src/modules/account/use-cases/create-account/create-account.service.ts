@@ -21,8 +21,13 @@ export class CreateAccountService implements UseCase<Input, Result> {
     private readonly AccountRepo: IAccountRepo
   ) { }
 
-  async execute(input: Input): Promise<Result> {
+  async execute(input: CreateAccountDto): Promise<Result> {
     const account = Account.create({
+      role: input.role,
+      username: input.username,
+      companyId: input.company_id,
     })
+    const data = await this.AccountRepo.create(account)
+    return { type: 'CreateAccountSucess', data }
   }
 }

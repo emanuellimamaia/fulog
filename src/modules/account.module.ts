@@ -5,9 +5,11 @@ import { ShowAccountsController } from "./account/use-cases/show-accounts/show-a
 import { ShowAccountsService } from "./account/use-cases/show-accounts/show-accounts.service";
 import { AccountRepo } from "./account/repositories/account.repo";
 import { DatabaseModule } from "src/infra/database.module";
+import { CreateAccountController } from "./account/use-cases/create-account/create-account.controller";
+import { CreateAccountService } from "./account/use-cases/create-account/create-account.service";
 @Module({
   imports: [DatabaseModule],
-  controllers: [IndexAccountController, ShowAccountsController],
-  providers: [IndexAccountsService, ShowAccountsService, AccountRepo, { provide: 'IAccountRepo', useExisting: AccountRepo }]
+  controllers: [IndexAccountController, ShowAccountsController, CreateAccountController],
+  providers: [IndexAccountsService, ShowAccountsService, AccountRepo, { provide: 'IAccountRepo', useExisting: AccountRepo }, CreateAccountService]
 })
 export class AccountModule { }
