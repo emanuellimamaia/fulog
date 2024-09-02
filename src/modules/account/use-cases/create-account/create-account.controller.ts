@@ -2,6 +2,7 @@ import { Body, Controller, Param, Post } from "@nestjs/common";
 import { ApiTags } from "@nestjs/swagger";
 import { CreateAccountService } from "./create-account.service";
 import { CreateAccountDto } from "../../dto/create-account.dto";
+import { AccountMapper } from "../../mappers/account.mappers";
 
 @ApiTags('Account')
 @Controller('Account')
@@ -11,6 +12,6 @@ export class CreateAccountController {
   @Post()
   async handle(@Body() data: CreateAccountDto) {
     const result = await this.createAccountService.execute(data);
-    return result;
+    return { ...result, data: AccountMapper.toDto(result.data) };
   }
 }
