@@ -7,6 +7,7 @@ interface VehicleProps {
   license_plate: string,
   year: number,
   type_of_fuel: string,
+  company_id: string,
 }
 
 export class Vehicle extends Entity<VehicleProps> {
@@ -30,5 +31,8 @@ export class Vehicle extends Entity<VehicleProps> {
   }
   get type_of_fuel() {
     return this.props.type_of_fuel
+  }
+  get company_id() {
+    return this.props.company_id
   }
 }

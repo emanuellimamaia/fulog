@@ -1,8 +1,9 @@
 import { Controller, Get } from "@nestjs/common";
 import { IndexCompaniesService } from "./index-companies.service";
 import { CompanyMapper } from "../../mappers/company.mappers";
+import { ApiTags } from "@nestjs/swagger";
 
-
+@ApiTags('Companies')
 @Controller('/companies')
 export class IndexCompaniesController {
   constructor(

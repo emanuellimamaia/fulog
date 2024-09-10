@@ -1,6 +1,8 @@
 import { Controller, Get } from "@nestjs/common";
 import { IndexAccountsService } from "./index-accounts.service";
-
+import { ApiTags } from "@nestjs/swagger";
+import { AccountMapper } from "../../mappers/account.mappers";
+@ApiTags('Account')
 @Controller('/accounts')
 export class IndexAccountController {
   constructor(
@@ -9,6 +11,7 @@ export class IndexAccountController {
 
   @Get()
   async handle() {
-    return this.indexAccountService.execute({})
+    const result = await this.indexAccountService.execute({})
+    return { ...result, data: result.data }
   }
 }

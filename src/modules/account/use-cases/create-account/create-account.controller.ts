@@ -5,7 +5,7 @@ import { CreateAccountDto } from "../../dto/create-account.dto";
 import { AccountMapper } from "../../mappers/account.mappers";
 
 @ApiTags('Account')
-@Controller('Account')
+@Controller('account')
 export class CreateAccountController {
   constructor(private readonly createAccountService: CreateAccountService) { }
 

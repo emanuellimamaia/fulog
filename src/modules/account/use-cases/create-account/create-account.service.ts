@@ -25,7 +25,8 @@ export class CreateAccountService implements UseCase<Input, Result> {
     const account = Account.create({
       role: input.role,
       username: input.username,
-      companyId: input.company_id,
+
+
     })
     const data = await this.AccountRepo.create(account)
     return { type: 'CreateAccountSucess', data }

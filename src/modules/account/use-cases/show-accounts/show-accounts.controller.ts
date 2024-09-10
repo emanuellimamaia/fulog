@@ -1,7 +1,9 @@
 import { Controller, Get, NotFoundException, Param } from "@nestjs/common";
 import { ShowAccountsService } from "./show-accounts.service";
 import { AccountMapper } from "../../mappers/account.mappers";
+import { ApiTags } from "@nestjs/swagger";
 
+@ApiTags('Account')
 @Controller('/accounts')
 export class ShowAccountsController {
   constructor(

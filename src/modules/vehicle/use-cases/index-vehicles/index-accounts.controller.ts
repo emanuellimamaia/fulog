@@ -1,7 +1,8 @@
 import { Controller, Get } from "@nestjs/common";
 import { IndexVehiclesService } from "./index-vehicles.service";
 import { VehicleMapper } from "../../mappers/vehicle-mappers";
-
+import { ApiTags } from "@nestjs/swagger";
+@ApiTags('Vehicle')
 @Controller('/vehicles')
 export class IndexVehicleController {
   constructor(

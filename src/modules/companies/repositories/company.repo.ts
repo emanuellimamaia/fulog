@@ -9,8 +9,8 @@ export class CompanyRepo implements ICompanyRepo {
   constructor(private readonly prisma: PrismaService) { }
   async findAll(): Promise<{ total: number; data: Company[]; }> {
     const [total, data] = await this.prisma.$transaction([
-      this.prisma.company.count(),// contar todos as company
-      this.prisma.company.findMany(), // mostrar todas as company
+      this.prisma.company.count(),
+      this.prisma.company.findMany(),
     ])
     return { total, data: data.map((c) => CompanyMapper.toDomain(c)) }
   }

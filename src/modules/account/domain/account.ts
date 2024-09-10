@@ -2,6 +2,7 @@ import { Company } from "src/modules/companies/domain/company"
 import { Entity, EntityMetadata } from "src/shared/entity"
 
 type AccountProps = {
+  id?: string,
   companyId?: string
   username: string
   role: string
@@ -24,6 +25,9 @@ export class
   }
   get username() {
     return this.props.username
+  }
+  get id() {
+    return this.props.id
   }
 
 }

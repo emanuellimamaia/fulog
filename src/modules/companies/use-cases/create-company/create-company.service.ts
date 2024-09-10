@@ -21,7 +21,6 @@ export class CreateCompanyService implements UseCase<Input, Result> {
       company_name: input.company_name,
       area: input.area
     })
-    console.log(company)
     const data = await this.companyRepo.create(company)
     return { type: 'CreateSuccessCompany ', data }
   }

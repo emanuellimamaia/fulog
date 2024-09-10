@@ -1,7 +1,10 @@
 import { Body, Controller, Post } from '@nestjs/common';
 import { CreateCompanyService } from './create-company.service';
 import { CreateCompanyDto } from '../../dto/create-company.dto';
+import { ApiTags } from '@nestjs/swagger';
+import { CompanyMapper } from '../../mappers/company.mappers';
 
+@ApiTags('Companies')
 @Controller('/companies')
 export class CreateCompanyController {
   constructor(
@@ -13,6 +16,6 @@ export class CreateCompanyController {
     data: CreateCompanyDto
   ) {
     const result = await this.createCompaniesService.execute(data)
-    return result
+    return { ...result, data: CompanyMapper.toDto(result.data) }
   }
 }
