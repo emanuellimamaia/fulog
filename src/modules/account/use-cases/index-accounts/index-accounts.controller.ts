@@ -12,6 +12,6 @@ export class IndexAccountController {
   @Get()
   async handle() {
     const result = await this.indexAccountService.execute({})
-    return { ...result, data: result.data }
+    return { ...result, data: result.data.map(AccountMapper.toDto) }
   }
 }

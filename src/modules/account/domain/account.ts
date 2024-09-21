@@ -3,7 +3,8 @@ import { Entity, EntityMetadata } from "src/shared/entity"
 
 type AccountProps = {
   id?: string,
-  companyId?: string
+  companyId?: string,
+  company?: Company
   username: string
   role: string
 
@@ -19,6 +20,9 @@ export class
   }
   get companyId() {
     return this.props.companyId
+  }
+  get company() {
+    return this.props.company
   }
   get role() {
     return this.props.role
