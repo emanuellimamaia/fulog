@@ -14,6 +14,16 @@ export class CompanyRepo implements ICompanyRepo {
     ])
     return { total, data: data.map((c) => CompanyMapper.toDomain(c)) }
   }
+  async findById(id: string): Promise<Company> {
+    const company = await this.prisma.company.findUnique({
+      where: { id },
+      include: { vehicles: true }
+    })
+    if (!company) {
+      return
+    }
+    return CompanyMapper.toDomain(company)
+  }
   async create(company: Company): Promise<Company> {
     const result = await this.prisma.company.create({
       data: {
