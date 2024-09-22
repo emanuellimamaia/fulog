@@ -1,18 +1,25 @@
-import { Controller, Get, Param } from "@nestjs/common";
+import { Controller, Get, NotFoundException, Param } from "@nestjs/common";
 import { ShowCompaniesService } from "./show-companies.service";
 import { ApiTags } from "@nestjs/swagger";
+import { CompanyMapper } from "../../mappers/company.mappers";
 
 @ApiTags('Companies')
 @Controller('/companies')
 export class ShowCompaniesController {
   constructor(
-    private readonly showCompaniesController: ShowCompaniesService
+    private readonly showCompaniesService: ShowCompaniesService
   ) { }
 
   @Get('/:id')
   async handle(
     @Param('id') id: string
   ) {
-    return this.showCompaniesController.execute(id)
+    const result = await this.showCompaniesService.execute({ id })
+    switch (result.message) {
+      case 'empresa encontrada':
+        return { ...result, data: CompanyMapper.toDto(result.data) }
+      case 'empresa não encontrado':
+        throw new NotFoundException(result)
+    }
   }
 }

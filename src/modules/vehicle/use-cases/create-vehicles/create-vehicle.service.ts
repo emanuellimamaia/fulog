@@ -1,4 +1,4 @@
-import { Company } from "src/modules/companies/domain/company";
+
 
 import { Inject, Injectable } from "@nestjs/common";
 import { UseCase } from "src/shared/use-case";
@@ -20,11 +20,9 @@ export class CreateVehicleService implements UseCase<Input, Result> {
   constructor(
     @Inject('IVehicleRepo')
     private readonly vehicleRepo: IVehicleRepo,
-    @Inject('ICompanyRepo')
-    private readonly companyRepo: ICompanyRepo,
   ) { }
 
-  async execute(input: Input): Promise<Result> {
+  async execute(input: CreateVehicleDto): Promise<Result> {
     const vehicle = Vehicle.create({
       brand: input.brand,
       kilometers: input.kilometers,

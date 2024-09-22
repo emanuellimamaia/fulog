@@ -26,4 +26,9 @@ export class CreateVehicleDto {
   @IsNotEmpty()
   @IsString()
   type_of_fuel: string
+
+  @ApiProperty()
+  @IsNotEmpty()
+  @IsString()
+  companyId: string
 }
