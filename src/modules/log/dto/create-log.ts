@@ -29,10 +29,11 @@ export class CreateLogDto {
   @IsNotEmpty()
   finalKilometers: number
 
-  @ApiProperty()
+
+  @ApiPropertyOptional()
   @IsString()
-  @IsNotEmpty()
-  delivered: boolean
+  @IsOptional()
+  delivered?: boolean
 
   @ApiPropertyOptional()
   @IsString()

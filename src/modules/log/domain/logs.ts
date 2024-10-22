@@ -5,8 +5,8 @@ export type LogProps = {
   vehicleId: string,
   accountId: string,
   initialKilometers: number,
-  finalKilometers: number,
-  delivered: Date,
+  finalKilometers?: number,
+  delivered?: Date,
   notes?: string,
 }
 
@@ -14,7 +14,7 @@ export class Log extends Entity<LogProps> {
   constructor(props: LogProps, metadata?: EntityMetadata) {
     super(props, metadata)
   }
-  static create(props: LogProps, metadata: EntityMetadata) {
+  static create(props: LogProps, metadata?: EntityMetadata) {
     return new Log(props, metadata)
   }
   get companyId() {

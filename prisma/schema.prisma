@@ -67,8 +67,8 @@ model Log {
   account    Account @relation(fields: [account_id], references: [id])
 
   initial_kilometers Int
-  final_kilometers   Int
-  delivered          DateTime
+  final_kilometers   Int?
+  delivered          DateTime?
   notes              String?
   created_at         DateTime  @default(now())
   updated_at         DateTime  @updatedAt

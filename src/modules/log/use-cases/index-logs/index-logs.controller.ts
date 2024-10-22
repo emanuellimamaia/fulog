@@ -3,7 +3,7 @@ import { ApiTags } from '@nestjs/swagger';
 import { IndexLogsService } from './index-logs.service';
 import { LogMapper } from '../../mappers/log.mappers';
 
-@ApiTags('Logs')
+@ApiTags('Log')
 @Controller('/logs')
 export class IndexLogsController {
 
