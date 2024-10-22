@@ -36,6 +36,7 @@ model Account {
   role       String
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
+  Log        Log[]
 
   @@map("accounts")
 }
@@ -57,18 +58,21 @@ model Vehicle {
 }
 
 model Log {
-  id                 String   @id @default(cuid())
-  company_id         String
-  company            Company  @relation(fields: [company_id], references: [id])
-  vehicle_id         String
-  vehicle            Vehicle  @relation(fields: [vehicle_id], references: [id])
+  id         String  @id @default(cuid())
+  company_id String
+  company    Company @relation(fields: [company_id], references: [id])
+  vehicle_id String
+  vehicle    Vehicle @relation(fields: [vehicle_id], references: [id])
+  account_id String
+  account    Account @relation(fields: [account_id], references: [id])
+
   initial_kilometers Int
   final_kilometers   Int
   delivered          DateTime
-  withdraw           DateTime @default(now())
-  notes              String
-  created_at         DateTime @default(now())
-  updated_at         DateTime @updatedAt
+  notes              String?
+  created_at         DateTime  @default(now())
+  updated_at         DateTime  @updatedAt
+  deleted_at         DateTime?
 
   @@map("logs")
 }
