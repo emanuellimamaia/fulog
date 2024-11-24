@@ -29,8 +29,11 @@ model Company {
 }
 
 model Account {
-  id         String   @id @default(cuid())
+  id         String  @id @default(cuid())
   company_id String
+  email      String? @unique
+  password   String?
+
   company    Company  @relation(fields: [company_id], references: [id])
   username   String
   role       String

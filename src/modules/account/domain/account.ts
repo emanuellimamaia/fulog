@@ -1,13 +1,14 @@
 import { Company } from "src/modules/companies/domain/company"
 import { Entity, EntityMetadata } from "src/shared/entity"
-
+import * as bcrypt from 'bcrypt';
 type AccountProps = {
   id?: string,
   companyId?: string,
   company?: Company
   username: string
   role: string
-
+  email: string
+  password: string
 }
 
 export class
@@ -18,6 +19,7 @@ export class
   static create(props: AccountProps, metadata?: EntityMetadata) {
     return new Account(props, metadata)
   }
+
   get companyId() {
     return this.props.companyId
   }
@@ -34,4 +36,15 @@ export class
     return this.props.id
   }
 
+  get email() {
+    return this.props.email
+  }
+
+  get password() {
+    return this.props.password;
+  }
+
+  set password(password: string) {
+    this.props.password = bcrypt.hashSync(password, 10);
+  }
 }

@@ -13,6 +13,18 @@ export class CreateAccountDto {
   @IsNotEmpty()
   role: string
 
+  @ApiProperty()
+  @IsString()
+  @IsNotEmpty()
+  email: string
+
+  @ApiProperty()
+  @IsString()
+  @IsNotEmpty()
+  password: string
+
+
+
   @ApiProperty({ required: false })
   @IsString()
   @IsOptional()

@@ -11,7 +11,7 @@ type NotFoundAccountError = {
 
 
 type ShowAccountSuccess = {
-  message: 'usuário encontrado'
+  message: 'Usuário encontrado'
   data: Account
 }
 type Result = NotFoundAccountError | ShowAccountSuccess
@@ -31,7 +31,18 @@ export class ShowAccountsService implements UseCase<Input, Result> {
     }
     return {
       data: result,
-      message: 'usuário encontrado',
+      message: 'Usuário encontrado',
     }
+  }
+
+  async getByEmail(input: Input) {
+    const result = await this.getByEmail(input)
+    if (!result) {
+      return {
+        message: 'usuário não encontrado'
+      }
+    }
+
+    return result
   }
 }

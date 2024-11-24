@@ -18,7 +18,7 @@ export class ShowAccountsController {
     switch (result.message) {
       case 'usuário não encontrado':
         throw new NotFoundException(result)
-      case 'usuário encontrado':
+      case 'Usuário encontrado':
         return { ...result, data: AccountMapper.toDto(result.data) }
     }
   }

@@ -24,7 +24,16 @@ export class AccountRepo implements IAccountRepo {
     }
     return AccountMapper.toDomain(account);
   }
+  async findByEmail(email: string): Promise<Account> {
+    const account = await this.prisma.account.findUnique({
+      where: { email },
 
+    })
+    if (!account) {
+      return
+    }
+    return AccountMapper.toDomain(account);
+  }
   async create(account: Account): Promise<Account> {
 
 
