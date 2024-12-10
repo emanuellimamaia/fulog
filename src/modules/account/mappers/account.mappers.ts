@@ -1,5 +1,5 @@
 import { Account as AccountClient, Company as CompanyClient } from "@prisma/client";
-import { Account } from "../domain/account";
+import { Account } from "../domain/account.entity";
 import { AccountDto } from "../dto/account.dto";
 import { CompanyMapper } from "src/modules/companies/mappers/company.mappers";
 

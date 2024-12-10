@@ -1,5 +1,5 @@
 import { Inject, Injectable } from "@nestjs/common";
-import { Account } from "src/modules/account/domain/account";
+import { Account } from "src/modules/account/domain/account.entity";
 import { ICompanyRepo } from "../../repositories/company.repo.interface";
 import { Company } from "../../domain/company";
 import { UseCase } from "src/shared/use-case";

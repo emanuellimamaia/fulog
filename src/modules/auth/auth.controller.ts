@@ -16,7 +16,7 @@ export class AuthController {
     try {
       const { id, role, username } = req.user;
       const { email } = data;
-      const token = this.authService.getToken({ id, role, username });
+      const token = this.authService.getToken({ id, role, username, email });
       return { id, role, token, email };
     } catch (error) {
       throw error;

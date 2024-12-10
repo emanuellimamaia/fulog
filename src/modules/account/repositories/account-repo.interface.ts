@@ -1,4 +1,5 @@
-import { Account } from "../domain/account"
+import { Account } from "../domain/account.entity";
+
 
 
 

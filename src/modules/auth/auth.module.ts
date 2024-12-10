@@ -11,14 +11,16 @@ import { LocalStrategy } from './local.strategy';
 import { JwtStrategy } from './jwt.strategy';
 
 @Module({
-  imports: [DatabaseModule, AccountModule, JwtModule.register({
-    global: true,
-    secret: JWT_SECRET,
-    signOptions: { expiresIn: '1d' }
-
-
-  })],
-  providers: [AuthService, GetByEmailService, LocalStrategy, JwtService, JwtStrategy],
-  controllers: [AuthController]
+  imports: [
+    DatabaseModule,
+    AccountModule,
+    JwtModule.register({
+      global: true,
+      secret: JWT_SECRET,
+      signOptions: { expiresIn: '1d' },
+    }),
+  ],
+  providers: [AuthService, GetByEmailService, LocalStrategy, JwtService, JwtStrategy, AccountRepo],
+  controllers: [AuthController],
 })
 export class AuthModule { }

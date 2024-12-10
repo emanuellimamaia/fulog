@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { IAccountRepo } from '../../repositories/account-repo.interface';
 import { UseCase } from 'src/shared/use-case';
-import { Account } from '../../domain/account';
+import { Account } from '../../domain/account.entity';
 type Input = {
   id: string
 }
@@ -23,6 +23,7 @@ export class ShowAccountsService implements UseCase<Input, Result> {
   ) { }
 
   async execute(input: Input): Promise<Result> {
+    console.log('id recebido no serviço', input);
     const result = await this.accountRepo.findById(input.id)
     if (!result) {
       return {

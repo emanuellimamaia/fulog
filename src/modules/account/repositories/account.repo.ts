@@ -1,4 +1,4 @@
-import { Account } from '../domain/account';
+import { Account } from '../domain/account.entity';
 import { IAccountRepo } from './account-repo.interface';
 import { Injectable } from '@nestjs/common';
 import { AccountMapper } from '../mappers/account.mappers';

@@ -10,7 +10,7 @@ import { VehicelModule } from 'src/modules/vehicle.modoule';
 import { GLOBAL_CONFIG } from 'src/config/global.config';
 
 @Module({
-  imports: [CompaniesModule, AccountModule, DatabaseModule, VehicelModule, LogsModule, AuthModule, ConfigModule.forRoot({ isGlobal: true, load: [() => GLOBAL_CONFIG] }),],
+  imports: [CompaniesModule, AccountModule, DatabaseModule, VehicelModule, LogsModule, ConfigModule.forRoot({ isGlobal: true, load: [() => GLOBAL_CONFIG] }),],
   controllers: [],
   providers: [],
 })

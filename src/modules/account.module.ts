@@ -7,12 +7,44 @@ import { AccountRepo } from "./account/repositories/account.repo";
 import { DatabaseModule } from "src/infra/database.module";
 import { CreateAccountController } from "./account/use-cases/create-account/create-account.controller";
 import { CreateAccountService } from "./account/use-cases/create-account/create-account.service";
-import { AuthModule } from './auth/auth.module';
+
 import { GetByEmailService } from './account/use-cases/get-by-email/get-by-email.service';
+import { GetMeController } from "./account/use-cases/get-me/get-me.controller";
+import { AuthService } from "./auth/auth.service";
+import { LocalStrategy } from "./auth/local.strategy";
+import { JwtModule, JwtService } from "@nestjs/jwt";
+import { JwtStrategy } from "./auth/jwt.strategy";
+import { AuthController } from "./auth/auth.controller";
+import { JWT_SECRET } from "src/shared/global.constants";
+
 @Module({
-  imports: [DatabaseModule],
-  controllers: [IndexAccountController, ShowAccountsController, CreateAccountController],
-  providers: [IndexAccountsService, ShowAccountsService, AccountRepo, { provide: 'IAccountRepo', useExisting: AccountRepo }, CreateAccountService, GetByEmailService],
-  exports: ['IAccountRepo'],
+  imports: [
+    DatabaseModule,
+    JwtModule.register({
+      global: true,
+      secret: JWT_SECRET,
+      signOptions: { expiresIn: '1d' },
+    }),
+  ],
+  controllers: [
+    AuthController,
+    IndexAccountController,
+    ShowAccountsController,
+    CreateAccountController,
+    GetMeController,
+  ],
+  providers: [
+    AuthService,
+    LocalStrategy,
+    JwtService,
+    JwtStrategy,
+    GetByEmailService,
+    IndexAccountsService,
+    ShowAccountsService,
+    CreateAccountService,
+    AccountRepo,
+    { provide: 'IAccountRepo', useExisting: AccountRepo },
+  ],
+  exports: ['IAccountRepo', GetByEmailService],
 })
 export class AccountModule { }

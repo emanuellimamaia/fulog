@@ -1,7 +1,7 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { GetByEmailService } from '../account/use-cases/get-by-email/get-by-email.service';
 import { JwtService } from '@nestjs/jwt';
-import { Account } from '../account/domain/account';
+import { Account } from '../account/domain/account.entity';
 import { JWT_SECRET } from 'src/shared/global.constants';
 
 import * as bcrypt from 'bcrypt';
@@ -19,10 +19,11 @@ export class AuthService {
       throw new UnauthorizedException('invalid credentials');
     return account.data
   }
-  getToken(user: Pick<Account, 'id' | 'username' | 'role'>): string {
+  getToken(user: Pick<Account, 'id' | 'username' | 'role' | 'email'>): string {
     const payload = {
       username: user.username,
       role: user.role,
+      email: user.email
     }
     return this.jwtService.sign(payload, { secret: JWT_SECRET });
   }

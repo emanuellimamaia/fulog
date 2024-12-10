@@ -1,6 +1,6 @@
 import { Inject, Injectable } from "@nestjs/common";
 import { IAccountRepo } from "../../repositories/account-repo.interface";
-import { Account } from "../../domain/account";
+import { Account } from "../../domain/account.entity";
 import { UseCase } from "src/shared/use-case";
 type Input = {
 }
