@@ -23,7 +23,6 @@ export class ShowAccountsService implements UseCase<Input, Result> {
   ) { }
 
   async execute(input: Input): Promise<Result> {
-    console.log('id recebido no serviço', input);
     const result = await this.accountRepo.findById(input.id)
     if (!result) {
       return {
