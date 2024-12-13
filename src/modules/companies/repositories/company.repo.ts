@@ -1,8 +1,9 @@
 import { PrismaService } from "src/infra/prisma/prisma.service";
 import { ICompanyRepo } from "./company.repo.interface";
-import { Company } from "../domain/company";
+import { Company } from "../domain/company.entity";
 import { CompanyMapper } from "../mappers/company.mappers";
 import { Injectable } from "@nestjs/common";
+import { Roles } from "src/shared/core/types.enum";
 
 @Injectable()
 export class CompanyRepo implements ICompanyRepo {
@@ -22,16 +23,26 @@ export class CompanyRepo implements ICompanyRepo {
     if (!company) {
       return
     }
+
     return CompanyMapper.toDomain(company)
   }
-  async create(company: Company): Promise<Company> {
+  async create(company: Company, userInput: { username: string; email: string; password: string }): Promise<Company> {
     const result = await this.prisma.company.create({
       data: {
-        cnpj: company.cnpj,
         company_name: company.company_name,
-        area: company.area
-      }
-    })
-    return CompanyMapper.toDomain(result)
+        accounts: {
+          create: {
+            username: userInput.username,
+            email: userInput.email,
+            password: userInput.password,
+            role: Roles.ADMIN,
+          },
+        },
+      },
+      include: {
+        accounts: true,
+      },
+    });
+    return CompanyMapper.toDomain(result);
   }
 }

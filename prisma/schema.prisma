@@ -14,10 +14,8 @@ datasource db {
 }
 
 model Company {
-  id           String  @id @default(cuid())
+  id           String @id @default(cuid())
   company_name String
-  cnpj         String  @unique
-  area         String?
 
   created_at DateTime  @default(now())
   updated_at DateTime  @updatedAt

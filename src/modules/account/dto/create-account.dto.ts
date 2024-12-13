@@ -1,6 +1,7 @@
 import { DEFAULT_FACTORY_CLASS_METHOD_KEY } from "@nestjs/common/module-utils/constants";
 import { ApiProperty } from "@nestjs/swagger";
 import { IsNotEmpty, IsOptional, IsString } from "class-validator";
+import { Roles } from "src/shared/core/types.enum";
 
 export class CreateAccountDto {
   @ApiProperty()
@@ -8,10 +9,6 @@ export class CreateAccountDto {
   @IsNotEmpty()
   username: string
 
-  @ApiProperty()
-  @IsString()
-  @IsNotEmpty()
-  role: string
 
   @ApiProperty()
   @IsString()
@@ -24,11 +21,6 @@ export class CreateAccountDto {
   password: string
 
 
-
-  @ApiProperty({ required: false })
-  @IsString()
-  @IsOptional()
-  company_id: string
 
 
 }

@@ -1,5 +1,7 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { IsNotEmpty, IsString } from "class-validator";
+import { Type } from "class-transformer";
+import { IsNotEmpty, IsObject, IsString, ValidateNested } from "class-validator";
+import { CreateAccountDto } from "src/modules/account/dto/create-account.dto";
 
 export class CreateCompanyDto {
 
@@ -9,12 +11,11 @@ export class CreateCompanyDto {
   company_name: string
 
   @ApiProperty()
-  @IsString()
   @IsNotEmpty()
-  cnpj: string
+  @IsObject()
+  @ValidateNested()
+  @Type(() => CreateAccountDto)
+  user: CreateAccountDto
 
-  @ApiProperty({ required: false })
-  @IsString()
-  area?: string
 
 }

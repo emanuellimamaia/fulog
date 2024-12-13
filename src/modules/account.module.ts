@@ -45,6 +45,6 @@ import { JWT_SECRET } from "src/shared/global.constants";
     AccountRepo,
     { provide: 'IAccountRepo', useExisting: AccountRepo },
   ],
-  exports: ['IAccountRepo', GetByEmailService],
+  exports: ['IAccountRepo', GetByEmailService, CreateAccountService],
 })
 export class AccountModule { }

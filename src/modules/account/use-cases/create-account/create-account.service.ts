@@ -4,11 +4,13 @@ import { CreateAccountDto } from "../../dto/create-account.dto";
 import { UseCase } from "src/shared/use-case";
 import { IAccountRepo } from "../../repositories/account-repo.interface";
 import { ICompanyRepo } from "src/modules/companies/repositories/company.repo.interface";
-import { Company } from "src/modules/companies/domain/company";
+import { Company } from "src/modules/companies/domain/company.entity";
+import { Roles } from "src/shared/core/types.enum";
 
 
 type Input = CreateAccountDto & {
-  companyId: string
+  companyId: string,
+  role: Roles
 }
 
 type Result = {
@@ -35,13 +37,12 @@ export class CreateAccountService implements UseCase<Input, Result> {
 
   ) { }
 
-  async execute(input: CreateAccountDto): Promise<Result> {
-
+  async execute(input: Input): Promise<Result> {
 
     const account = Account.create({
       role: input.role,
       username: input.username,
-      companyId: input.company_id,
+      companyId: input.companyId,
       email: input.email,
       password: input.password
     })
