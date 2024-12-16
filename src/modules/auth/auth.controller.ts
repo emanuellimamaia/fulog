@@ -14,10 +14,11 @@ export class AuthController {
   @Post('login')
   async handle(@Request() req, @Body() data: AuthUserDto) {
     try {
-      const { id, role, username } = req.user;
+      const { id, role, username, companyId } = req.user;
       const { email } = data;
-      const token = this.authService.getToken({ id, role, username, email });
-      return { id, role, token, email };
+      console.log('company',)
+      const token = this.authService.getToken({ id, role, username, email, companyId });
+      return { id, role, token, email, username, companyId };
     } catch (error) {
       throw error;
     }

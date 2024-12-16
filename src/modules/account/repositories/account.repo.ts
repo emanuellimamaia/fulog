@@ -27,7 +27,7 @@ export class AccountRepo implements IAccountRepo {
   async findByEmail(email: string): Promise<Account> {
     const account = await this.prisma.account.findUnique({
       where: { email },
-
+      include: { company: true }
     })
     if (!account) {
       return

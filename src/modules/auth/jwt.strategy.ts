@@ -16,7 +16,6 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     })
   }
 
-
   async validate(payload) {
     const account = await this.getByEmailService.execute({ email: payload.email });
     return AccountMapper.toDto(account.data)
