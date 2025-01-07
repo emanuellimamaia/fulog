@@ -1,6 +1,6 @@
 import { Account } from '../domain/account.entity';
 import { IAccountRepo } from './account-repo.interface';
-import { ConflictException, Injectable } from '@nestjs/common';
+import { BadRequestException, ConflictException, Injectable, NotFoundException } from '@nestjs/common';
 import { AccountMapper } from '../mappers/account.mappers';
 import { PrismaService } from 'src/infra/prisma/prisma.service';
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
@@ -57,5 +57,20 @@ export class AccountRepo implements IAccountRepo {
     }
 
   }
-
+  async changeStatus(id: string, status: boolean) {
+    try {
+      const result = await this.prisma.account.update({
+        where: { id },
+        data: {
+          status
+        }
+      })
+      return {
+        message: 'Status atualizado com sucesso.',
+        account: result,
+      };
+    } catch (error) {
+      throw new Error('Não foi possível atualizar o status. Tente novamente mais tarde.');
+    }
+  }
 }

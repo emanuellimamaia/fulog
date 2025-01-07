@@ -5,4 +5,5 @@ export interface IAccountRepo {
   findById(id: string): Promise<Account>
   create(account: Account): Promise<Account>
   findByEmail(email: string): Promise<Account>
+  changeStatus(id: string, status: boolean)
 }

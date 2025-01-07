@@ -16,6 +16,9 @@ import { JwtModule, JwtService } from "@nestjs/jwt";
 import { JwtStrategy } from "./auth/jwt.strategy";
 import { AuthController } from "./auth/auth.controller";
 import { JWT_SECRET } from "src/shared/global.constants";
+import { ChangeStatusAccountService } from './account/use-cases/change-status-account/change-status-account.service';
+import { ChangeStatusAccountController } from './account/use-cases/change-status-account/change-status-account.controller';
+
 
 @Module({
   imports: [
@@ -32,6 +35,7 @@ import { JWT_SECRET } from "src/shared/global.constants";
     ShowAccountsController,
     CreateAccountController,
     GetMeController,
+    ChangeStatusAccountController,
   ],
   providers: [
     AuthService,
@@ -44,6 +48,7 @@ import { JWT_SECRET } from "src/shared/global.constants";
     CreateAccountService,
     AccountRepo,
     { provide: 'IAccountRepo', useExisting: AccountRepo },
+    ChangeStatusAccountService,
   ],
   exports: ['IAccountRepo', GetByEmailService, CreateAccountService],
 })
