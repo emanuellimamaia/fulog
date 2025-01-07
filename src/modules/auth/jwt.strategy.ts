@@ -7,6 +7,7 @@ import { AccountMapper } from '../account/mappers/account.mappers';
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
+
   constructor(
     private getByEmailService: GetByEmailService) {
     super({

@@ -2,8 +2,9 @@ import { PrismaService } from "src/infra/prisma/prisma.service";
 import { ICompanyRepo } from "./company.repo.interface";
 import { Company } from "../domain/company.entity";
 import { CompanyMapper } from "../mappers/company.mappers";
-import { Injectable } from "@nestjs/common";
+import { ConflictException, Injectable } from "@nestjs/common";
 import { Roles } from "src/shared/core/types.enum";
+import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 
 @Injectable()
 export class CompanyRepo implements ICompanyRepo {
@@ -27,22 +28,30 @@ export class CompanyRepo implements ICompanyRepo {
     return CompanyMapper.toDomain(company)
   }
   async create(company: Company, userInput: { username: string; email: string; password: string }): Promise<Company> {
-    const result = await this.prisma.company.create({
-      data: {
-        company_name: company.company_name,
-        accounts: {
-          create: {
-            username: userInput.username,
-            email: userInput.email,
-            password: userInput.password,
-            role: Roles.ADMIN,
+    try {
+      const result = await this.prisma.company.create({
+        data: {
+          company_name: company.company_name,
+          accounts: {
+            create: {
+              username: userInput.username,
+              email: userInput.email,
+              password: userInput.password,
+              role: Roles.ADMIN,
+            },
           },
         },
-      },
-      include: {
-        accounts: true,
-      },
-    });
-    return CompanyMapper.toDomain(result);
+        include: {
+          accounts: true,
+        },
+      });
+      return CompanyMapper.toDomain(result);
+    } catch (error) {
+      if (error instanceof PrismaClientKnownRequestError && error.code === 'P2002') {
+        throw new ConflictException('Email já está em uso.');
+      }
+      throw error
+    }
+
   }
 }

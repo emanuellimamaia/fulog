@@ -6,6 +6,7 @@ export type AccountDto = {
   role: string,
   username: string
   email: string
+  status: boolean
   company: CompanyDto
 
 }

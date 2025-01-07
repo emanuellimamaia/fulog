@@ -15,12 +15,15 @@ export class AuthService {
   async validateUser(email: string, password: string) {
 
     const account = await this.getByEmailService.execute({ email });
-    if (!account) {
+    if (!account.data) {
       throw new UnauthorizedException('invalid credentials');
     }
+
     const isPasswordValid = await bcrypt.compare(password, account.data.password)
-    if (!isPasswordValid)
+
+    if (!isPasswordValid) {
       throw new UnauthorizedException('invalid credentials');
+    }
 
     return account.data
   }
@@ -29,7 +32,7 @@ export class AuthService {
       username: user.username,
       role: user.role,
       email: user.email,
-      companyId: user.companyId
+      companyId: user.companyId,
     }
     return this.jwtService.sign(payload, { secret: JWT_SECRET });
   }

@@ -14,9 +14,9 @@ export class AuthController {
   @Post('login')
   async handle(@Request() req, @Body() data: AuthUserDto) {
     try {
-      const { id, role, username, companyId } = req.user;
+      const { id, role, username } = req.user;
       const { email } = data;
-      console.log('company',)
+      const companyId = req.user.company._id
       const token = this.authService.getToken({ id, role, username, email, companyId });
       return { id, role, token, email, username, companyId };
     } catch (error) {

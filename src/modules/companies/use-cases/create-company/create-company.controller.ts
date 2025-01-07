@@ -4,8 +4,8 @@ import { CreateCompanyDto } from '../../dto/create-company.dto';
 import { ApiTags } from '@nestjs/swagger';
 import { CompanyMapper } from '../../mappers/company.mappers';
 
-@ApiTags('Companie')
-@Controller('/companies')
+@ApiTags('Companies')
+@Controller('/company')
 export class CreateCompanyController {
   constructor(
     private readonly createCompaniesService: CreateCompanyService

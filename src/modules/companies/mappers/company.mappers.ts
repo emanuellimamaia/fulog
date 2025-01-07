@@ -5,7 +5,7 @@ import { CompanyDto } from "../dto/company.dto";
 export class CompanyMapper {
   static toDomain(raw: CompanyClient) {
     return Company.create({
-
+      id: raw.id,
       company_name: raw.company_name
     }, { created_at: raw.created_at, id: raw.id, updated_at: raw.updated_at })
   }

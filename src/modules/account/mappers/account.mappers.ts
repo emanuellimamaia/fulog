@@ -13,6 +13,7 @@ export class AccountMapper {
       email: raw.email,
       password: raw.password,
       company: raw.company && CompanyMapper.toDomain(raw.company),
+      status: raw.status
     },
       {
         id: raw.id,
@@ -26,6 +27,7 @@ export class AccountMapper {
       id: account.id,
       role: account.role,
       username: account.username,
+      status: account.status,
       email: account.email,
       company: account.company && CompanyMapper.toDto(account.company)
     }

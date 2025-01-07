@@ -7,6 +7,7 @@ type AccountProps = {
   companyId?: string,
   company?: Company
   username: string
+  status?: boolean
   role?: string
   email: string
   password: string
@@ -30,6 +31,14 @@ export class
   get role() {
     return this.props.role
   }
+  get status() {
+    return this.props.status
+  }
+  /*************  ✨ Codeium Command ⭐  *************/
+  /**
+   * Returns the username of the account.
+   */
+  /******  fe3ecd18-0b92-4bdc-91db-bc5a1985ee26  *******/
   get username() {
     return this.props.username
   }
@@ -39,6 +48,10 @@ export class
 
   get email() {
     return this.props.email
+  }
+
+  set email(email: string) {
+    this.props.email = email
   }
 
   get password() {
