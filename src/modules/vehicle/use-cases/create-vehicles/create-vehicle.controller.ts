@@ -13,7 +13,6 @@ export class CreateVehiclesController {
   @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()
   @Post()
-
   async handle(@Body() data: CreateVehicleDto, @Req() req) {
     const companyId = req.user.company.id
     const result = await this.createVehicleService.execute({

@@ -8,3 +8,7 @@ export enum LogProgress {
   Completed = 'Completo',
   Cancelled = 'Cancelado'
 }
+export enum VehicleAvailability {
+  Available = 'Disponível',
+  Unavailable = 'Indisponível'
+}

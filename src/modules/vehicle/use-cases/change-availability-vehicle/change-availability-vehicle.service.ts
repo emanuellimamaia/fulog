@@ -10,6 +10,7 @@ export class ChangeAvailabilityVehicleService {
   ) { }
 
   async updateAVailability(id: string, availability: string): Promise<Vehicle> {
+
     const result = await this.vehicleRepo.changeAvailability(id, availability)
     return result
   }
