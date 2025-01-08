@@ -2,12 +2,15 @@ import { Entity, EntityMetadata } from "src/shared/entity"
 
 
 interface VehicleProps {
+  id?: string
+  model: string,
   kilometers: number,
   brand: string,
   license_plate: string,
   year: number,
   type_of_fuel: string,
   company_id: string,
+  status?: boolean
 }
 
 export class Vehicle extends Entity<VehicleProps> {
@@ -16,6 +19,15 @@ export class Vehicle extends Entity<VehicleProps> {
   }
   static create(props: VehicleProps, metadata?: EntityMetadata) {
     return (new Vehicle(props, metadata))
+  }
+  get id() {
+    return this.props.id
+  }
+  get status() {
+    return this.props.status
+  }
+  get model() {
+    return this.props.model
   }
   get kilometers() {
     return this.props.kilometers

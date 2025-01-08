@@ -5,6 +5,9 @@ import { VehicleDto } from '../dto/vehicle.dto';
 export class VehicleMapper {
   static toDomain(raw: VehicleClient): Vehicle {
     return Vehicle.create({
+      id: raw.id,
+      status: raw.status,
+      model: raw.model,
       company_id: raw.company_id,
       brand: raw.brand,
       kilometers: raw.kilometers,
@@ -15,6 +18,9 @@ export class VehicleMapper {
   }
   static toDto(vehicle: Vehicle): VehicleDto {
     return {
+      id: vehicle.id,
+      status: vehicle.status,
+      model: vehicle.model,
       brand: vehicle.brand,
       kilometers: vehicle.kilometers,
       license_plate: vehicle.license_plate,

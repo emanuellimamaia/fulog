@@ -11,7 +11,7 @@ type Input = CreateVehicleDto & {
 }
 
 type Result = {
-  type: 'CreateCompanySuccess'
+  type: 'CreateVehicleSuccess'
   data: Vehicle
 }
 
@@ -22,20 +22,20 @@ export class CreateVehicleService implements UseCase<Input, Result> {
     private readonly vehicleRepo: IVehicleRepo,
   ) { }
 
-  async execute(input: CreateVehicleDto): Promise<Result> {
+  async execute(input: Input): Promise<Result> {
     const vehicle = Vehicle.create({
+      model: input.model,
       brand: input.brand,
       kilometers: input.kilometers,
       license_plate: input.license_plate,
       type_of_fuel: input.type_of_fuel,
       year: input.year,
       company_id: input.companyId
-
     })
     const data = await this.vehicleRepo.create(vehicle)
 
 
-    return { type: 'CreateCompanySuccess', data }
+    return { type: 'CreateVehicleSuccess', data }
 
   }
 }

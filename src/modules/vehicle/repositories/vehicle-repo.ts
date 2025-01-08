@@ -10,28 +10,37 @@ export class VehicleRepo implements IVehicleRepo {
 
   async create(vehicle: Vehicle): Promise<Vehicle> {
     try {
+      // Verifica se o company_id existe
+      const companyExists = await this.prisma.company.findUnique({
+        where: { id: vehicle.company_id },
+      });
+
+      if (!companyExists) {
+        throw new Error(`Company with ID '${vehicle.company_id}' not found.`);
+      }
+
+      // Cria o veículo
       const result = await this.prisma.vehicle.create({
         data: {
+          model: vehicle.model,
           brand: vehicle.brand,
           kilometers: vehicle.kilometers,
           license_plate: vehicle.license_plate,
           type_of_fuel: vehicle.type_of_fuel,
           year: vehicle.year,
           company: {
-            connect: {
-              id: vehicle.company_id
-            }
+            connect: { id: vehicle.company_id },
           },
-        }
-      })
-      return VehicleMapper.toDomain(result)
+        },
+      });
+
+      return VehicleMapper.toDomain(result);
     } catch (error) {
       throw new InternalServerErrorException(error.message, {
-        cause: new Error(error)
-      })
+        cause: new Error(error),
+      });
     }
   }
-
   async findAll(): Promise<{ total: number; data: Vehicle[] }> {
     const [total, data] = await this.prisma.$transaction([
       this.prisma.vehicle.count(),

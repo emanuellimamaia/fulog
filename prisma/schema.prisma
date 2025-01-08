@@ -37,12 +37,14 @@ model Account {
 
 model Vehicle {
   id            String   @id @default(cuid())
+  model         String
   company_id    String
   kilometers    Int
   brand         String
   license_plate String
   year          Int
   type_of_fuel  String
+  status        Boolean  @default(true)
   created_at    DateTime @default(now())
   updated_at    DateTime @updatedAt
   logs          Log[]

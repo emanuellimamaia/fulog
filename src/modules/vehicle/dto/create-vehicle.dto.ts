@@ -1,11 +1,16 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { IsNotEmpty, IsString } from "class-validator";
+import { IsNotEmpty, IsNumber, IsString } from "class-validator";
 
 export class CreateVehicleDto {
   @ApiProperty()
   @IsNotEmpty()
-  @IsString()
+  @IsNumber()
   kilometers: number
+
+  @ApiProperty()
+  @IsNotEmpty()
+  @IsString()
+  model: string
 
   @ApiProperty()
   @IsNotEmpty()
@@ -19,7 +24,7 @@ export class CreateVehicleDto {
 
   @ApiProperty()
   @IsNotEmpty()
-  @IsString()
+  @IsNumber()
   year: number
 
   @ApiProperty()
@@ -27,8 +32,4 @@ export class CreateVehicleDto {
   @IsString()
   type_of_fuel: string
 
-  @ApiProperty()
-  @IsNotEmpty()
-  @IsString()
-  companyId: string
 }
