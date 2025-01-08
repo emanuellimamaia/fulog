@@ -20,6 +20,8 @@ import { ChangeStatusAccountService } from './account/use-cases/change-status-ac
 import { ChangeStatusAccountController } from './account/use-cases/change-status-account/change-status-account.controller';
 
 
+
+
 @Module({
   imports: [
     DatabaseModule,
@@ -48,7 +50,8 @@ import { ChangeStatusAccountController } from './account/use-cases/change-status
     CreateAccountService,
     AccountRepo,
     { provide: 'IAccountRepo', useExisting: AccountRepo },
-    ChangeStatusAccountService
+    ChangeStatusAccountService,
+
   ],
   exports: ['IAccountRepo', GetByEmailService, CreateAccountService],
 })

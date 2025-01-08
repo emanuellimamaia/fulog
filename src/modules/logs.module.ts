@@ -7,10 +7,11 @@ import { CreateLogController } from "./log/use-cases/create-log/create-log.contr
 import { CreateLogService } from "./log/use-cases/create-log/create-log.service";
 import { ShowVehicleController } from "./vehicle/use-cases/show-vehicles/show-vehicles.controller";
 import { ShowVehiclesService } from "./vehicle/use-cases/show-vehicles/show-vehicles.service";
+import { VehicelModule } from "./vehicle.modoule";
 
 @Module({
-  imports: [DatabaseModule],
+  imports: [DatabaseModule, VehicelModule],
   controllers: [IndexLogsController, CreateLogController],
-  providers: [IndexLogsService, LogRepo, { provide: 'ILogRepo', useExisting: LogRepo }, CreateLogService],
+  providers: [IndexLogsService, LogRepo, { provide: 'ILogRepo', useExisting: LogRepo }, CreateLogService, ShowVehiclesService],
 })
 export class LogsModule { }

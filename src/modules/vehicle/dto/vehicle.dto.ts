@@ -7,4 +7,5 @@ export type VehicleDto = {
   year: number,
   type_of_fuel: string,
   status?: boolean
+  availability?: string
 }

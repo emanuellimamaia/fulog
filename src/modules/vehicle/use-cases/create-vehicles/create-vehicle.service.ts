@@ -4,7 +4,7 @@ import { Inject, Injectable } from "@nestjs/common";
 import { UseCase } from "src/shared/use-case";
 import { IVehicleRepo } from "../../repositories/vehicle-repo.interface";
 import { ICompanyRepo } from 'src/modules/companies/repositories/company.repo.interface'
-import { Vehicle } from "../../domain/vehicle";
+import { Vehicle } from "../../domain/vehicle.entity";
 import { CreateVehicleDto } from "../../dto/create-vehicle.dto";
 type Input = CreateVehicleDto & {
   companyId: string

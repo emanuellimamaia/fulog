@@ -1,4 +1,4 @@
-import { Body, Controller, Post, Req, UseGuards } from '@nestjs/common';
+import { Body, Controller, Param, Post, Req, UseGuards } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { CreateLogService } from './create-log.service';
 import { CreateLogDto } from '../../dto/create-log';
@@ -12,12 +12,12 @@ export class CreateLogController {
 
   @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()
-  @Post()
-  async handle(@Body() data: CreateLogDto, @Req() req) {
+  @Post(':vehicleId')
+  async handle(@Param('vehicleId') vehicleId: string, @Req() req) {
     const companyId = req.user.company.id
     const accountId = req.user.id
     const result = await this.createLogService.execute({
-      ...data,
+      vehicleId,
       companyId,
       accountId,
     })

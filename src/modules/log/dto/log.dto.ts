@@ -4,7 +4,7 @@ export interface LogDto {
   vehicleId: string
   accountId: string
   initialKilometers: number
-  finalKilometers: number
-  delivered: Date
+  finalKilometers?: number
+  delivered?: Date
   notes?: string
 } 

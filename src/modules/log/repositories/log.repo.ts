@@ -29,6 +29,7 @@ export class LogRepo implements ILogRepo {
         data: {
           initial_kilometers: log.initialKilometers,
           progress: log.progress,
+
           account: {
             connect: {
               id: log.accountId

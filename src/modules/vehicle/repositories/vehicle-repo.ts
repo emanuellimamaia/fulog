@@ -1,7 +1,7 @@
 import { Injectable, InternalServerErrorException } from "@nestjs/common";
 import { IVehicleRepo } from "./vehicle-repo.interface";
 import { PrismaService } from "src/infra/prisma/prisma.service";
-import { Vehicle } from "../domain/vehicle";
+import { Vehicle } from "../domain/vehicle.entity";
 import { VehicleMapper } from "../mappers/vehicle-mappers";
 
 @Injectable()
@@ -50,13 +50,33 @@ export class VehicleRepo implements IVehicleRepo {
   }
 
   async findById(id: string): Promise<Vehicle> {
-    const vehicle = await this.prisma.vehicle.findUnique({
-      where: { id },
-      include: { company: true }
-    })
-    if (!vehicle) {
-      return
+    try {
+      const vehicle = await this.prisma.vehicle.findUnique({
+        where: { id },
+        include: { company: true }
+      })
+
+      return VehicleMapper.toDomain(vehicle)
+    } catch (error) {
+      throw new InternalServerErrorException(error.message, {
+        cause: new Error(error),
+      });
     }
-    return VehicleMapper.toDomain(vehicle)
   }
+
+
+  async changeAvailability(id: string, availability: string): Promise<Vehicle> {
+    try {
+      const result = await this.prisma.vehicle.update({
+        where: { id },
+        data: { availability },
+      });
+      return VehicleMapper.toDomain(result);
+    } catch (error) {
+      throw new InternalServerErrorException(error.message, {
+        cause: new Error(error),
+      });
+    }
+  }
+
 }

@@ -11,6 +11,7 @@ interface VehicleProps {
   type_of_fuel: string,
   company_id: string,
   status?: boolean
+  availability?: string
 }
 
 export class Vehicle extends Entity<VehicleProps> {
@@ -23,6 +24,11 @@ export class Vehicle extends Entity<VehicleProps> {
   get id() {
     return this.props.id
   }
+
+  get availability() {
+    return this.props.availability
+  }
+
   get status() {
     return this.props.status
   }
