@@ -48,7 +48,7 @@ import { ChangeStatusAccountController } from './account/use-cases/change-status
     CreateAccountService,
     AccountRepo,
     { provide: 'IAccountRepo', useExisting: AccountRepo },
-    ChangeStatusAccountService,
+    ChangeStatusAccountService
   ],
   exports: ['IAccountRepo', GetByEmailService, CreateAccountService],
 })

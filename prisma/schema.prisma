@@ -58,6 +58,7 @@ model Log {
   company_id         String
   vehicle_id         String
   initial_kilometers Int
+  progress           String    @default("")
   final_kilometers   Int?
   delivered          DateTime?
   notes              String?

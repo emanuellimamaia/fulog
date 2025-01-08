@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { Log } from '../../domain/logs';
+import { Log } from '../../domain/logs.entity';
 import { UseCase } from 'src/shared/use-case';
 import { ILogRepo } from '../../repositories/log.repo.interface';
 

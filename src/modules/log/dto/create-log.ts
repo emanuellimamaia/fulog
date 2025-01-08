@@ -4,25 +4,12 @@ import { IsNotEmpty, IsOptional, IsString } from "class-validator"
 export class CreateLogDto {
 
 
-  @ApiProperty()
-  @IsString()
-  @IsNotEmpty()
-  companyId: string
 
   @ApiProperty()
   @IsString()
   @IsNotEmpty()
   vehicleId: string
 
-  @ApiProperty()
-  @IsString()
-  @IsNotEmpty()
-  accountId: string
-
-  @ApiProperty()
-  @IsString()
-  @IsNotEmpty()
-  initialKilometers: number
 
   @ApiProperty()
   @IsString()

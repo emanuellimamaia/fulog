@@ -1,4 +1,5 @@
 import { Entity, EntityMetadata } from "src/shared/entity";
+import { LogProgress } from "src/shared/global.constants";
 
 export type LogProps = {
   companyId: string,
@@ -8,6 +9,7 @@ export type LogProps = {
   finalKilometers?: number,
   delivered?: Date,
   notes?: string,
+  progress: string
 }
 
 export class Log extends Entity<LogProps> {
@@ -17,6 +19,7 @@ export class Log extends Entity<LogProps> {
   static create(props: LogProps, metadata?: EntityMetadata) {
     return new Log(props, metadata)
   }
+
   get companyId() {
     return this.props.companyId
   }
@@ -28,6 +31,12 @@ export class Log extends Entity<LogProps> {
     return this.props.accountId
   }
 
+  get progress() {
+    return this.props.progress
+  }
+  set progress(progress: string) {
+    this.props.progress = progress
+  }
   get initialKilometers() {
     return this.props.initialKilometers
   }

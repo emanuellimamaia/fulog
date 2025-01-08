@@ -1,7 +1,7 @@
 import { Injectable, InternalServerErrorException, NotFoundException } from "@nestjs/common";
 import { ILogRepo } from "./log.repo.interface";
 import { PrismaService } from "src/infra/prisma/prisma.service";
-import { Log } from "../domain/logs";
+import { Log } from "../domain/logs.entity";
 import { LogMapper } from "../mappers/log.mappers";
 import { EntityMetadata } from "src/shared/entity";
 
@@ -28,6 +28,7 @@ export class LogRepo implements ILogRepo {
       const result = await this.prisma.log.create({
         data: {
           initial_kilometers: log.initialKilometers,
+          progress: log.progress,
           account: {
             connect: {
               id: log.accountId
