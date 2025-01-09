@@ -39,7 +39,6 @@ export class CreateLogService implements UseCase<Input, Result> {
       throw new NotAcceptableException('Veículo indisponível')
     }
     await this.changeAvailabilityVehicleService.updateAVailability(vehicle.id, VehicleAvailability.Unavailable)
-
     const log = Log.create({
       accountId: input.accountId,
       companyId: input.companyId,

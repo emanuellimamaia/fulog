@@ -1,3 +1,5 @@
+import { Company } from "src/modules/companies/domain/company.entity"
+import { Log } from "src/modules/log/domain/logs.entity"
 import { Entity, EntityMetadata } from "src/shared/entity"
 
 
@@ -12,6 +14,8 @@ interface VehicleProps {
   company_id: string,
   status?: boolean
   availability?: string
+  company?: Company
+  log?: Log[]
 }
 
 export class Vehicle extends Entity<VehicleProps> {
@@ -24,9 +28,14 @@ export class Vehicle extends Entity<VehicleProps> {
   get id() {
     return this.props.id
   }
-
+  get log() {
+    return this.props.log
+  }
   get availability() {
     return this.props.availability
+  }
+  get company() {
+    return this.props.company
   }
 
   get status() {

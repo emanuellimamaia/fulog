@@ -13,7 +13,7 @@ export class LogRepo implements ILogRepo {
     try {
       const [total, data] = await this.prisma.$transaction([
         this.prisma.log.count(),
-        this.prisma.log.findMany()
+        this.prisma.log.findMany({ include: { account: true, company: true, vehicle: true } }),
 
       ])
       return { total, data: data.map(LogMapper.toDomain) }
@@ -54,5 +54,29 @@ export class LogRepo implements ILogRepo {
       })
     }
   }
-
+  async findById(id: string): Promise<Log> {
+    const log = await this.prisma.log.findUnique({
+      where: { id },
+    });
+    if (!log) return null;
+    return LogMapper.toDomain(log);
+  }
+  async finish(log: Log): Promise<Log> {
+    try {
+      const result = await this.prisma.log.update({
+        where: { id: log.id },
+        data: {
+          final_kilometers: log.finalKilometers,
+          delivered: log.delivered,
+          notes: log.notes,
+          progress: log.progress,
+        },
+      });
+      return LogMapper.toDomain(result);
+    } catch (error) {
+      throw new InternalServerErrorException(error.message, {
+        cause: new Error(error),
+      });
+    }
+  }
 }

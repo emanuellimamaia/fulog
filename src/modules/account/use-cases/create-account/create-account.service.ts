@@ -16,16 +16,6 @@ type Result = {
   data: Account
 }
 
-type CompanyMustBeDefinedError = {
-  success: false;
-  status: 'CompanyMustBeDefined';
-};
-
-type CompanyNotFoundError = {
-  success: false;
-  status: 'CompanyNotFound';
-};
-
 
 @Injectable()
 export class CreateAccountService implements UseCase<Input, Result> {

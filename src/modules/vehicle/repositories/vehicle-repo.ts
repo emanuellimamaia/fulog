@@ -44,7 +44,7 @@ export class VehicleRepo implements IVehicleRepo {
   async findAll(): Promise<{ total: number; data: Vehicle[] }> {
     const [total, data] = await this.prisma.$transaction([
       this.prisma.vehicle.count(),
-      this.prisma.vehicle.findMany({ include: { company: true } })
+      this.prisma.vehicle.findMany({ include: { company: true, logs: true } })
     ])
     return { total, data: data.map((e) => VehicleMapper.toDomain(e)) }
   }

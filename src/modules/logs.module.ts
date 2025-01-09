@@ -8,10 +8,12 @@ import { CreateLogService } from "./log/use-cases/create-log/create-log.service"
 import { ShowVehicleController } from "./vehicle/use-cases/show-vehicles/show-vehicles.controller";
 import { ShowVehiclesService } from "./vehicle/use-cases/show-vehicles/show-vehicles.service";
 import { VehicelModule } from "./vehicle.modoule";
+import { FinishLogService } from "./log/use-cases/finish-log/finish-log.service";
+import { FinishLogController } from "./log/use-cases/finish-log/finish-log.controller";
 
 @Module({
   imports: [DatabaseModule, VehicelModule],
-  controllers: [IndexLogsController, CreateLogController],
-  providers: [IndexLogsService, LogRepo, { provide: 'ILogRepo', useExisting: LogRepo }, CreateLogService, ShowVehiclesService],
+  controllers: [IndexLogsController, CreateLogController, FinishLogController],
+  providers: [IndexLogsService, LogRepo, { provide: 'ILogRepo', useExisting: LogRepo }, CreateLogService, ShowVehiclesService, FinishLogService],
 })
 export class LogsModule { }
