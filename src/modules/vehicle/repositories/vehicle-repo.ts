@@ -64,7 +64,19 @@ export class VehicleRepo implements IVehicleRepo {
     }
   }
 
-
+  async updateKilometers(id: string, kilometers: number): Promise<Vehicle> {
+    try {
+      const result = await this.prisma.vehicle.update({
+        where: { id },
+        data: { kilometers },
+      })
+      return VehicleMapper.toDomain(result)
+    } catch (error) {
+      throw new InternalServerErrorException(error.message, {
+        cause: new Error(error),
+      });
+    }
+  }
   async changeAvailability(id: string, availability: string): Promise<Vehicle> {
     try {
       const result = await this.prisma.vehicle.update({

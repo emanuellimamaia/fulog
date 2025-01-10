@@ -5,6 +5,7 @@ import { ILogRepo } from '../../repositories/log.repo.interface';
 import { FinishLogDto } from '../../dto/finish-log';
 import { LogProgress, VehicleAvailability } from 'src/shared/global.constants';
 import { ChangeAvailabilityVehicleService } from 'src/modules/vehicle/use-cases/change-availability-vehicle/change-availability-vehicle.service';
+import { UpdateKilometersService } from 'src/modules/vehicle/use-cases/update-kilometers/update-kilometers.service';
 
 type Input = FinishLogDto & {
   logId: string
@@ -19,7 +20,8 @@ export class FinishLogService implements UseCase<Input, Result> {
   constructor(
     @Inject('ILogRepo')
     private readonly logRepo: ILogRepo,
-    private readonly changeAvailabilityVehicleService: ChangeAvailabilityVehicleService
+    private readonly changeAvailabilityVehicleService: ChangeAvailabilityVehicleService,
+    private readonly updateKilometersService: UpdateKilometersService
   ) { }
   async execute(input: Input): Promise<Result> {
     const log = await this.logRepo.findById(input.logId);
@@ -39,8 +41,11 @@ export class FinishLogService implements UseCase<Input, Result> {
       log.delivered = new Date();
       log.notes = input.notes;
       log.progress = LogProgress.Completed;
-      const data = await this.logRepo.finish(log);
+
       await this.changeAvailabilityVehicleService.updateAVailability(log.vehicleId, VehicleAvailability.Available)
+      await this.updateKilometersService.execute(log.vehicleId, input.final_kilometers)
+
+      const data = await this.logRepo.finish(log);
       return { type: 'FisinishLogSucess', data }
     } catch (error) {
       throw new InternalServerErrorException(error.message, {

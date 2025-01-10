@@ -10,10 +10,11 @@ import { ShowVehiclesService } from "./vehicle/use-cases/show-vehicles/show-vehi
 import { VehicelModule } from "./vehicle.modoule";
 import { FinishLogService } from "./log/use-cases/finish-log/finish-log.service";
 import { FinishLogController } from "./log/use-cases/finish-log/finish-log.controller";
+import { UpdateKilometersService } from "./vehicle/use-cases/update-kilometers/update-kilometers.service";
 
 @Module({
   imports: [DatabaseModule, VehicelModule],
   controllers: [IndexLogsController, CreateLogController, FinishLogController],
-  providers: [IndexLogsService, LogRepo, { provide: 'ILogRepo', useExisting: LogRepo }, CreateLogService, ShowVehiclesService, FinishLogService],
+  providers: [IndexLogsService, LogRepo, { provide: 'ILogRepo', useExisting: LogRepo }, CreateLogService, ShowVehiclesService, FinishLogService, UpdateKilometersService],
 })
 export class LogsModule { }

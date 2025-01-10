@@ -20,6 +20,7 @@ import { ChangeStatusAccountService } from './account/use-cases/change-status-ac
 import { ChangeStatusAccountController } from './account/use-cases/change-status-account/change-status-account.controller';
 import { FinishLogService } from './log/use-cases/finish-log/finish-log.service';
 import { FinishLogController } from './log/use-cases/finish-log/finish-log.controller';
+import { UpdateKilometersService } from './vehicle/use-cases/update-kilometers/update-kilometers.service';
 
 
 
@@ -52,7 +53,7 @@ import { FinishLogController } from './log/use-cases/finish-log/finish-log.contr
     CreateAccountService,
     AccountRepo,
     { provide: 'IAccountRepo', useExisting: AccountRepo },
-    ChangeStatusAccountService
+    ChangeStatusAccountService,
   ],
   exports: ['IAccountRepo', GetByEmailService, CreateAccountService],
 })

@@ -8,12 +8,13 @@ import { CreateVehicleService } from "./vehicle/use-cases/create-vehicles/create
 import { ShowVehiclesService } from "./vehicle/use-cases/show-vehicles/show-vehicles.service";
 import { ShowVehicleController } from "./vehicle/use-cases/show-vehicles/show-vehicles.controller";
 import { ChangeAvailabilityVehicleService } from "./vehicle/use-cases/change-availability-vehicle/change-availability-vehicle.service";
+import { UpdateKilometersService } from "./vehicle/use-cases/update-kilometers/update-kilometers.service";
 
 @Module({
   imports: [DatabaseModule],
   controllers: [IndexVehicleController, CreateVehiclesController, ShowVehicleController],
-  providers: [IndexVehiclesService, VehicleRepo, { provide: 'IVehicleRepo', useExisting: VehicleRepo }, CreateVehicleService, ShowVehiclesService, ChangeAvailabilityVehicleService],
-  exports: ['IVehicleRepo', ShowVehiclesService, ChangeAvailabilityVehicleService]
+  providers: [IndexVehiclesService, VehicleRepo, { provide: 'IVehicleRepo', useExisting: VehicleRepo }, CreateVehicleService, ShowVehiclesService, ChangeAvailabilityVehicleService, UpdateKilometersService],
+  exports: ['IVehicleRepo', ShowVehiclesService, ChangeAvailabilityVehicleService, UpdateKilometersService]
 })
 
 export class VehicelModule { }
