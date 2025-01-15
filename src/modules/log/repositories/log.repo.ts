@@ -9,11 +9,11 @@ import { EntityMetadata } from "src/shared/entity";
 export class LogRepo implements ILogRepo {
   constructor(private readonly prisma: PrismaService) { }
 
-  async findAll(): Promise<{ total: number, data: Log[] }> {
+  async findAll(companyId: string): Promise<{ total: number, data: Log[] }> {
     try {
       const [total, data] = await this.prisma.$transaction([
         this.prisma.log.count(),
-        this.prisma.log.findMany({ include: { account: true, company: true, vehicle: true } }),
+        this.prisma.log.findMany({ where: { company_id: companyId }, include: { account: true, company: true, vehicle: true } }),
 
       ])
       return { total, data: data.map(LogMapper.toDomain) }

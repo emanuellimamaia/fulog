@@ -14,4 +14,5 @@ export type VehicleDto = {
   availability?: string
   company: CompanyDto
   log: LogDto[]
+  companyId: string
 }

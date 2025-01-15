@@ -4,7 +4,9 @@ import { UseCase } from 'src/shared/use-case';
 import { IVehicleRepo } from '../../repositories/vehicle-repo.interface';
 import { Vehicle } from '../../domain/vehicle.entity';
 
-type Input = {};
+type Input = {
+  companyId: string
+};
 
 type Result = {
   total: number;
@@ -17,7 +19,7 @@ export class IndexVehiclesService implements UseCase<Input, Result> {
     @Inject('IVehicleRepo')
     private readonly vehicleRepo: IVehicleRepo) { }
   async execute(input: Input): Promise<Result> {
-    const result = await this.vehicleRepo.findAll()
+    const result = await this.vehicleRepo.findAll(input.companyId)
     return result
   }
 }

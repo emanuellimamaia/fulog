@@ -4,6 +4,7 @@ import { UseCase } from 'src/shared/use-case';
 import { ILogRepo } from '../../repositories/log.repo.interface';
 
 type Input = {
+  companyId: string
 }
 type Result = {
   total: number,
@@ -19,7 +20,7 @@ export class IndexLogsService implements UseCase<Input, Result> {
   ) { }
 
   async execute(input: Input): Promise<Result> {
-    const result = await this.logRepo.findAll()
+    const result = await this.logRepo.findAll(input.companyId)
     return result
   }
 }

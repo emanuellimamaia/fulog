@@ -33,6 +33,7 @@ export class VehicleMapper {
       license_plate: vehicle.license_plate,
       type_of_fuel: vehicle.type_of_fuel,
       year: vehicle.year,
+      companyId: vehicle.company_id,
       company: vehicle.company && CompanyMapper.toDto(vehicle.company),
       log: vehicle.log && vehicle.log.map((lg) => LogMapper.toDto(lg))
     }

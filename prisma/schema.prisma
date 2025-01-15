@@ -39,7 +39,7 @@ model Vehicle {
   id            String   @id @default(cuid())
   model         String
   company_id    String
-  availability  String   @default("Disponivel")
+  availability  String   @default("Disponível")
   kilometers    Int
   brand         String
   license_plate String
