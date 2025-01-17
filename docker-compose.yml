@@ -5,6 +5,17 @@ networks:
     driver: bridge
 
 services:
+  app:
+    image: fulog:v1
+    build:
+      context: .
+    environment:
+      DATABASE_URL: postgresql://postgres:docker@postgresql:5432/fulog?schema=public
+    networks:
+      - app-network
+    ports:
+      - '7777:8080'
+
   postgresql:
     image: 'bitnami/postgresql:latest'
     networks:
