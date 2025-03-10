@@ -36,22 +36,37 @@ model Account {
 }
 
 model Vehicle {
-  id            String   @id @default(cuid())
+  id            String         @id @default(cuid())
   model         String
   company_id    String
-  availability  String   @default("Disponível")
+  availability  String         @default("Disponível")
   kilometers    Int
   brand         String
   license_plate String
   year          Int
   type_of_fuel  String
-  status        Boolean  @default(true)
-  created_at    DateTime @default(now())
-  updated_at    DateTime @updatedAt
+  status        Boolean        @default(true)
+  created_at    DateTime       @default(now())
+  updated_at    DateTime       @updatedAt
   logs          Log[]
-  company       Company  @relation(fields: [company_id], references: [id])
+  company       Company        @relation(fields: [company_id], references: [id])
+  FuelExpense   FuelExpenses[]
 
   @@map("vehicles")
+}
+
+model FuelExpenses {
+  id              String   @id @default(cuid())
+  vehicle_id      String
+  date            DateTime @default(now())
+  amount          Int
+  liters          Int
+  price_per_liter Int
+  created_at      DateTime @default(now())
+
+  vehicle Vehicle @relation(fields: [vehicle_id], references: [id], onDelete: Cascade)
+
+  @@map("fuel_expenses")
 }
 
 model Log {

@@ -10,14 +10,21 @@ export class VehicleRepo implements IVehicleRepo {
 
   async create(vehicle: Vehicle): Promise<Vehicle> {
     try {
-      // Verifica se o company_id existe
+
       const companyExists = await this.prisma.company.findUnique({
         where: { id: vehicle.company_id },
       });
-
       if (!companyExists) {
         throw new Error(`Company with ID '${vehicle.company_id}' not found.`);
       }
+
+      const vehicleExists = await this.prisma.vehicle.findFirst({
+        where: { license_plate: vehicle.license_plate }
+      })
+      if (vehicleExists) {
+        throw new Error(`Vehicle with license plate '${vehicle.license_plate}' already exists.`)
+      }
+
 
       // Cria o veículo
       const result = await this.prisma.vehicle.create({
