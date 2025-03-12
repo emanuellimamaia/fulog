@@ -8,9 +8,10 @@ import { CompaniesModule } from 'src/modules/companies.module';
 import { LogsModule } from 'src/modules/logs.module';
 import { VehicelModule } from 'src/modules/vehicle.modoule';
 import { GLOBAL_CONFIG } from 'src/config/global.config';
+import { FuelExpensesModule } from 'src/modules/fuel-expenses.module';
 
 @Module({
-  imports: [CompaniesModule, AccountModule, DatabaseModule, VehicelModule, LogsModule, ConfigModule.forRoot({ isGlobal: true, load: [() => GLOBAL_CONFIG] }),],
+  imports: [CompaniesModule, AccountModule, DatabaseModule, VehicelModule, LogsModule, FuelExpensesModule, ConfigModule.forRoot({ isGlobal: true, load: [() => GLOBAL_CONFIG] }),],
   controllers: [],
   providers: [],
 })

@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  postgresql:
+    image: postgres:latest
+    ports:
+      - '5432:5432'
+    environment:
+      POSTGRES_USER: teste
+      POSTGRES_PASSWORD: senha
+      POSTGRES_DB: testdb
+    volumes:
+      - postgresql_data:/var/lib/postgresql/data
+
+volumes:
+  postgresql_data:
