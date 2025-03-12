@@ -7,7 +7,7 @@ type Input = {
 }
 
 type Result = {
-  type: "FuelExpensesSucess"
+  total: number
   data: FuelExpenses[]
 }
 
@@ -19,7 +19,7 @@ export class IndexFuelExpensesService {
   async execute(input: Input): Promise<Result> {
     const result = await this.fuelExpensesRepo.findAll(input.vehicleId)
     return {
-      type: "FuelExpensesSucess",
+      total: result.total,
       data: result.data
     }
   }

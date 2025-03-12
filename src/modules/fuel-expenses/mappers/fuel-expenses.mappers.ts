@@ -13,7 +13,7 @@ export class FuelExpensesMapper {
       liters: raw.liters,
       price_per_liter: raw.price_per_liter,
       vehicle: raw.vehicle && VehicleMapper.toDomain(raw.vehicle)
-    })
+    }, { created_at: raw.created_at, id: raw.id, updated_at: raw.created_at })
   }
   static toDto(fuelExpenses: FuelExpenses) {
     return {
@@ -23,6 +23,7 @@ export class FuelExpensesMapper {
       amount: fuelExpenses.amount,
       liters: fuelExpenses.liters,
       price_per_liter: fuelExpenses.price_per_liter,
+      created_at: fuelExpenses.created_at,
       vehicle: fuelExpenses.vehicle && VehicleMapper.toDto(fuelExpenses.vehicle)
     }
   }
