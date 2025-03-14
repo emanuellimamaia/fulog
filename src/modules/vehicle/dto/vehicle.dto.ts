@@ -1,5 +1,5 @@
-import { Company } from "src/modules/companies/domain/company.entity"
 import { CompanyDto } from "src/modules/companies/dto/company.dto"
+import { FuelExpensesDto } from "src/modules/fuel-expenses/dto/fuel-expenses.dto"
 import { LogDto } from "src/modules/log/dto/log.dto"
 
 export type VehicleDto = {
@@ -14,5 +14,5 @@ export type VehicleDto = {
   availability?: string
   company: CompanyDto
   log: LogDto[]
-  companyId: string
+  fuelExpenses: FuelExpensesDto[]
 }

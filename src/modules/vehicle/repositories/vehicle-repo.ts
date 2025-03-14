@@ -47,7 +47,7 @@ export class VehicleRepo implements IVehicleRepo {
         cause: new Error(error),
       });
     }
-  }
+  } w
   async findAll(companyId: string): Promise<{ total: number; data: Vehicle[] }> {
 
     const [total, data] = await this.prisma.$transaction([
@@ -58,14 +58,14 @@ export class VehicleRepo implements IVehicleRepo {
     return { total, data: data.map((e) => VehicleMapper.toDomain(e)) }
   }
 
-  async findById(id: string): Promise<Vehicle> {
+  async findById(id: string) {
     try {
       const vehicle = await this.prisma.vehicle.findUnique({
         where: { id },
-        include: { company: true }
+        include: { company: true, logs: true, FuelExpense: true }
       })
 
-      return VehicleMapper.toDomain(vehicle)
+      return vehicle
     } catch (error) {
       throw new InternalServerErrorException(error.message, {
         cause: new Error(error),

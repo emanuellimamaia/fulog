@@ -2,6 +2,7 @@ import { Injectable, InternalServerErrorException } from "@nestjs/common";
 import { PrismaService } from "src/infra/prisma/prisma.service";
 import { FuelExpenses } from "../domain/fuel-expenses.entity";
 import { FuelExpensesMapper } from "../mappers/fuel-expenses.mappers";
+import { VehicleMapper } from "src/modules/vehicle/mappers/vehicle-mappers";
 
 @Injectable()
 export class FuelExpensesRepo {
@@ -26,13 +27,13 @@ export class FuelExpensesRepo {
     }
   }
 
-  async findAll(vehicleId: string): Promise<{ total: number, data: FuelExpenses[] }> {
+  async findAll(vehicleId: string) {
     try {
       const [total, data] = await this.prisma.$transaction([
         this.prisma.fuelExpenses.count(),
         this.prisma.fuelExpenses.findMany({ where: { vehicle_id: vehicleId }, include: { vehicle: true } }),
       ])
-      return { total, data: data.map(FuelExpensesMapper.toDomain) }
+      return { total, data }
 
     } catch (error) {
       throw new InternalServerErrorException(error.message, {

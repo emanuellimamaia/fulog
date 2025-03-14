@@ -1,4 +1,7 @@
+
 import { Company } from "src/modules/companies/domain/company.entity"
+import { FuelExpenses } from "src/modules/fuel-expenses/domain/fuel-expenses.entity"
+
 import { Log } from "src/modules/log/domain/logs.entity"
 import { Entity, EntityMetadata } from "src/shared/entity"
 
@@ -16,6 +19,7 @@ interface VehicleProps {
   availability?: string
   company?: Company
   log?: Log[]
+  fuelExpenses?: FuelExpenses[]
 }
 
 export class Vehicle extends Entity<VehicleProps> {
@@ -23,7 +27,7 @@ export class Vehicle extends Entity<VehicleProps> {
     super(props, metadata)
   }
   static create(props: VehicleProps, metadata?: EntityMetadata) {
-    return (new Vehicle(props, metadata))
+    return new Vehicle(props, metadata)
   }
   get id() {
     return this.props.id
@@ -37,6 +41,7 @@ export class Vehicle extends Entity<VehicleProps> {
   get company() {
     return this.props.company
   }
+
 
   get status() {
     return this.props.status
@@ -52,6 +57,9 @@ export class Vehicle extends Entity<VehicleProps> {
   }
   get license_plate() {
     return this.props.license_plate
+  }
+  get fuelExpenses() {
+    return this.props.fuelExpenses
   }
   get year() {
     return this.props.year
