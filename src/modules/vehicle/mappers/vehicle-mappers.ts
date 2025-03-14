@@ -1,12 +1,13 @@
-import { Company as CompanyClient, Log as LogClient, Vehicle as VehicleClient } from '@prisma/client'
+import { Company as CompanyClient, Log as LogClient, Vehicle as VehicleClient, FuelExpenses as FuelExpensesClient } from '@prisma/client'
 import { Vehicle } from '../domain/vehicle.entity';
 import { VehicleDto } from '../dto/vehicle.dto';
 import { CompanyMapper } from 'src/modules/companies/mappers/company.mappers';
 import { LogMapper } from 'src/modules/log/mappers/log.mappers';
+import { FuelExpensesMapper } from 'src/modules/fuel-expenses/mappers/fuel-expenses.mappers';
 
 
 export class VehicleMapper {
-  static toDomain(raw: VehicleClient & { company?: CompanyClient } & { logs?: LogClient[] }): Vehicle {
+  static toDomain(raw: VehicleClient & { company?: CompanyClient }): Vehicle {
     return Vehicle.create({
       id: raw.id,
       availability: raw.availability,
@@ -19,8 +20,13 @@ export class VehicleMapper {
       type_of_fuel: raw.type_of_fuel,
       year: raw.year,
       company: raw.company && CompanyMapper.toDomain(raw.company),
-      log: raw.logs && raw.logs.map(log => LogMapper.toDomain(log))
-    })
+
+
+    }, {
+      id: raw.id,
+      created_at: raw.created_at,
+      updated_at: raw.updated_at
+    });
   }
   static toDto(vehicle: Vehicle): VehicleDto {
     return {
@@ -33,9 +39,9 @@ export class VehicleMapper {
       license_plate: vehicle.license_plate,
       type_of_fuel: vehicle.type_of_fuel,
       year: vehicle.year,
-      companyId: vehicle.company_id,
       company: vehicle.company && CompanyMapper.toDto(vehicle.company),
-      log: vehicle.log && vehicle.log.map((lg) => LogMapper.toDto(lg))
+      log: vehicle.log && vehicle.log.map((lg) => LogMapper.toDto(lg)),
+      fuelExpenses: vehicle.fuelExpenses && vehicle.fuelExpenses.map((fuel) => FuelExpensesMapper.toDto(fuel))
     }
   }
 }

@@ -1,7 +1,7 @@
 import { Company } from "src/modules/companies/domain/company.entity"
 import { Entity, EntityMetadata } from "src/shared/entity"
 import * as bcrypt from 'bcrypt';
-import { Roles } from "src/shared/core/types.enum";
+
 type AccountProps = {
   id?: string,
   companyId?: string,

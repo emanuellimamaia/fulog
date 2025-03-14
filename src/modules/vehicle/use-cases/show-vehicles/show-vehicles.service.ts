@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { IVehicleRepo } from '../../repositories/vehicle-repo.interface';
 import { UseCase } from 'src/shared/use-case';
-import { Vehicle } from '@prisma/client';
+import { Vehicle } from '../../domain/vehicle.entity';
 
 
 @Injectable()
@@ -12,6 +12,6 @@ export class ShowVehiclesService {
   ) { }
   async execute(id: string): Promise<Vehicle> {
     const result = await this.vehicleRepo.findById(id)
-    return result
+    return result as Vehicle
   }
 }
