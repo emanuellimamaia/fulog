@@ -7,7 +7,7 @@ import { FuelExpensesMapper } from 'src/modules/fuel-expenses/mappers/fuel-expen
 
 
 export class VehicleMapper {
-  static toDomain(raw: VehicleClient & { company?: CompanyClient }): Vehicle {
+  static toDomain(raw: VehicleClient & { company?: CompanyClient } & { logs?: LogClient[] },): Vehicle {
     return Vehicle.create({
       id: raw.id,
       availability: raw.availability,
@@ -20,6 +20,7 @@ export class VehicleMapper {
       type_of_fuel: raw.type_of_fuel,
       year: raw.year,
       company: raw.company && CompanyMapper.toDomain(raw.company),
+      log: raw.logs && raw.logs.map(log => LogMapper.toDomain(log)),
 
 
     }, {
