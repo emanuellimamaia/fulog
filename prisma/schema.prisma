@@ -50,7 +50,7 @@ model Vehicle {
   updated_at    DateTime       @updatedAt
   logs          Log[]
   company       Company        @relation(fields: [company_id], references: [id])
-  FuelExpense   FuelExpenses[]
+  fuelExpense   FuelExpenses[]
 
   @@map("vehicles")
 }

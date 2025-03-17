@@ -11,6 +11,7 @@ export class ShowVehiclesService {
     private readonly vehicleRepo: IVehicleRepo
   ) { }
   async execute(id: string): Promise<Vehicle> {
+
     const result = await this.vehicleRepo.findById(id)
     return result as Vehicle
   }
