@@ -1,4 +1,4 @@
-import { Inject, Injectable, NotAcceptableException } from '@nestjs/common';
+import { ConsoleLogger, Inject, Injectable, NotAcceptableException } from '@nestjs/common';
 import { CreateLogDto } from '../../dto/create-log';
 import { Log } from '../../domain/logs.entity';
 import { UseCase } from 'src/shared/use-case';
@@ -35,6 +35,7 @@ export class CreateLogService implements UseCase<Input, Result> {
   async execute(input: Input): Promise<Result> {
 
     const vehicle = await this.showVehiclesService.execute(input.vehicleId)
+
     if (vehicle.availability === VehicleAvailability.Unavailable) {
       throw new NotAcceptableException('Veículo indisponível')
     }

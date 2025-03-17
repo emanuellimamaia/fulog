@@ -1,4 +1,4 @@
-import { Injectable, InternalServerErrorException } from "@nestjs/common";
+import { ConsoleLogger, Injectable, InternalServerErrorException } from "@nestjs/common";
 import { IVehicleRepo } from "./vehicle-repo.interface";
 import { PrismaService } from "src/infra/prisma/prisma.service";
 import { Vehicle } from "../domain/vehicle.entity";
@@ -62,9 +62,8 @@ export class VehicleRepo implements IVehicleRepo {
     try {
       const vehicle = await this.prisma.vehicle.findUnique({
         where: { id },
-        include: { company: true, logs: true, FuelExpense: true }
+        include: { company: true, logs: true, fuelExpense: true },
       })
-
       return vehicle
     } catch (error) {
       throw new InternalServerErrorException(error.message, {
