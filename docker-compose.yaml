@@ -12,14 +12,26 @@ services:
       POSTGRES_DB: testdb
     volumes:
       - postgresql_data:/var/lib/postgresql/data
+    networks:
+      - fulog-network
   api-fulog:
     build:
       context: .
     container_name: api-fulog
     ports:
       - '3001:3000'
+    environment:
+      - DATABASE_URL=postgresql://teste:senha@postgresql:5432/testdb
+      - JWT_SECRET=3123123
     depends_on:
       - postgresql
+    networks:
+      - fulog-network
+
+networks:
+  fulog-network:
+    driver: bridge
+    name: fulog-network
 
 volumes:
   postgresql_data:

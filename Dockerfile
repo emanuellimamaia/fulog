@@ -1,5 +1,5 @@
 # Build stage
-FROM node:18-alpine as build
+FROM node:18-alpine3.19 as build
  
 WORKDIR /usr/src/app
  
@@ -14,7 +14,7 @@ COPY . .
 RUN npm run build
 RUN npm cache clean --force
 
-FROM node:18-alpine
+FROM node:18-alpine3.19 
 
 WORKDIR /usr/src/app
 
