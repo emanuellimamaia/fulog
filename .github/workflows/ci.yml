@@ -19,8 +19,8 @@ jobs:
           cache: 'npm'
       - run: npm install
       - run: npm run build
-    
-      -name: Generate tag
+
+      - name: Generate tag
         id: generate_tag
         run: |
           SHA=$(echo $GITHUB_SHA | head -c7)
