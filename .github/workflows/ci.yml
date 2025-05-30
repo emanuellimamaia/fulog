@@ -22,4 +22,3 @@ jobs:
 
       - name: build docker image
         run: docker build -t fulog-backend:latest .
-        run:  
