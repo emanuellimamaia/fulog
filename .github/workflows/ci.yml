@@ -21,9 +21,10 @@ jobs:
       - run: npm run build
     
       -name: Generate tag
+        id: generate_tag
         run: |
           SHA=$(echo $GITHUB_SHA | head -c7)
           echo "sha=$SHA" >> $GITHUB_OUTPUT
 
       - name: build docker image
-        run: docker build -t fulog-backend:latest .
+        run: docker build -t fulog-backend:${{ steps.generate_tag.outputs.sha}} .
