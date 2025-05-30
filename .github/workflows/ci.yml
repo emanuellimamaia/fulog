@@ -17,5 +17,5 @@ jobs:
         with:
           node-version: '20'
           cache: 'npm'
-      - run: npm
+      - run: npm run install
       - run: npm run test
