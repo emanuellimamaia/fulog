@@ -19,6 +19,11 @@ jobs:
           cache: 'npm'
       - run: npm install
       - run: npm run build
+    
+      -name: Generate tag
+        run: |
+          SHA=$(echo $GITHUB_SHA | head -c7)
+          echo "sha=$SHA" >> $GITHUB_OUTPUT
 
       - name: build docker image
         run: docker build -t fulog-backend:latest .
