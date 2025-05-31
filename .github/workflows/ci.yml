@@ -31,7 +31,12 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: build docker image
-        run: docker build -t emanuellimamaia/fulog-backend:${{ steps.generate_tag.outputs.sha}} .
-      - name: Push image
-        run: docker push emanuellimamaia/fulog-backend:${{ steps.generate_tag.outputs.sha}}
+      # - name: build docker image
+      #   run: docker build -t emanuellimamaia/fulog-backend:${{ steps.generate_tag.outputs.sha}} .
+      # - name: Push image
+      #   run: docker push emanuellimamaia/fulog-backend:${{ steps.generate_tag.outputs.sha}}
+      - name: Build and push
+        uses: docker/build-push-action@v4
+        with:
+          push: true
+          tags: emanuellimamaia/fulog-backend:${{ steps.generate_tag.outputs.sha }},emanuellimamaia/fulog-backend:latest
