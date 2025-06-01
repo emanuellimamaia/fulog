@@ -39,6 +39,7 @@ jobs:
         uses: aws-actions/amazon-ecr-login@v2
 
       - name: build docker image
+        id: build-docker-image
         env:
           REGISTRY: '${{ steps.login-ecr.outputs.registry }}'
           TAG: '${{ steps.generate_tag.outputs.sha }}'
@@ -46,6 +47,22 @@ jobs:
         run: |
           docker build -t $REGISTRY/fulog-api-ci:$TAG .
           docker push $REGISTRY/fulog-api-ci:$TAG
+          IMAGE-$(echo $REGISTRY/fulog-api-ci:$TAG) 
+          echo "image=$IMAGE" >> $GITHUB_OUTPUT
+
+
+        - name: Deploy to App Runner
+        uses: awslabs/aws-app-runner-deploy@main
+        width:
+          service: fulog-api
+          image: ${{ steps.build-docker-image.outputs.image}}
+          access-role-arn: arn:aws:iam::307896280100:role/app-runner-role
+          region: 'us-east-1'
+          cpu: 1
+          memory: 1
+          port:  3000
+          image-repository: 307896280100.dkr.ecr.us-east-1.amazonaws.com/fulog-api-ci:5df4546
+
         # - uses: docker/login-action@v3
         # with:
         #   username: ${{ secrets.DOCKERHUB_USERNAME }}
