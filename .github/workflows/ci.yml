@@ -26,17 +26,27 @@ jobs:
           SHA=$(echo $GITHUB_SHA | head -c7)
           echo "sha=$SHA" >> $GITHUB_OUTPUT
 
-      - uses: docker/login-action@v3
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4.1.0
         with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
+          aws-region: us-east-1
+          role-to-assume: 'arn:aws:iam::307896280100:role/ecr-role'
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
+
+        # - uses: docker/login-action@v3
+        # with:
+        #   username: ${{ secrets.DOCKERHUB_USERNAME }}
+        #   password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       # - name: build docker image
       #   run: docker build -t emanuellimamaia/fulog-backend:${{ steps.generate_tag.outputs.sha}} .
       # - name: Push image
       #   run: docker push emanuellimamaia/fulog-backend:${{ steps.generate_tag.outputs.sha}}
-      - name: Build and push
-        uses: docker/build-push-action@v4
-        with:
-          push: true
-          tags: emanuellimamaia/fulog-backend:${{ steps.generate_tag.outputs.sha }},emanuellimamaia/fulog-backend:latest
+      # - name: Build and push
+      #   uses: docker/build-push-action@v4
+      #   with:
+      #     push: true
+      #     tags: emanuellimamaia/fulog-backend:${{ steps.generate_tag.outputs.sha }},emanuellimamaia/fulog-backend:latest
