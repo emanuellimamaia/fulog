@@ -50,8 +50,7 @@ jobs:
           IMAGE-$(echo $REGISTRY/fulog-api-ci:$TAG) 
           echo "image=$IMAGE" >> $GITHUB_OUTPUT
 
-
-        - name: Deploy to App Runner
+      - name: Deploy to App Runner
         uses: awslabs/aws-app-runner-deploy@main
         width:
           service: fulog-api
@@ -59,8 +58,8 @@ jobs:
           access-role-arn: arn:aws:iam::307896280100:role/app-runner-role
           region: 'us-east-1'
           cpu: 1
-          memory: 1
-          port:  3000
+          memory: 2
+          port: 3000
           image-repository: 307896280100.dkr.ecr.us-east-1.amazonaws.com/fulog-api-ci:5df4546
 
         # - uses: docker/login-action@v3
