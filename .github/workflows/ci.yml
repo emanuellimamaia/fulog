@@ -47,6 +47,8 @@ jobs:
         run: |
           docker build -t $REGISTRY/fulog-api-ci:$TAG .
           docker push $REGISTRY/fulog-api-ci:$TAG
+          docker tag $REGISTRY/fulog-api-ci:$TAG $REGISTRY/fulog-api-ci:latest
+          docker push $REGISTRY/fulog-api-ci:latest
           IMAGE=$(echo $REGISTRY/fulog-api-ci:$TAG) 
           echo "image=$IMAGE" >> $GITHUB_OUTPUT
 
@@ -60,16 +62,7 @@ jobs:
           cpu: 1
           memory: 2
           port: 3000
+          wait-for-service-stability-seconds: 100
 
-        # - uses: docker/login-action@v3
-        # with:
-        #   username: ${{ secrets.DOCKERHUB_USERNAME }}
-        #   password: ${{ secrets.DOCKERHUB_TOKEN }}
-
-      # - name: Push image
-      #   run: docker push emanuellimamaia/fulog-backend:${{ steps.generate_tag.outputs.sha}}
-      # - name: Build and push
-      #   uses: docker/build-push-action@v4
-      #   with:
-      #     push: true
-      #     tags: emanuellimamaia/fulog-backend:${{ steps.generate_tag.outputs.sha }},emanuellimamaia/fulog-backend:latest
+      - name: App Runner check
+        run: echo "App Runner running... ${{ steps.deploy-app-runner.outputs.service-url}} "
