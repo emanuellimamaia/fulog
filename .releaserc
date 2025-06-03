@@ -20,6 +20,13 @@
                 ]
             }
         ],
-        "@semantic-release/github"
+        [
+          "@semantic-release/github",
+          {
+            "labels": ["released"],            
+            "failComment": false,             
+            "failTitle": false                
+          }
+        ]
     ]
 }
