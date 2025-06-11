@@ -9,11 +9,13 @@ import { CreateCompanyController } from './companies/use-cases/create-company/cr
 import { CreateCompanyService } from './companies/use-cases/create-company/create-company.service';
 import { CreateAccountService } from './account/use-cases/create-account/create-account.service';
 import { AccountModule } from './account.module';
+import { AnalysisService } from './companies/use-cases/analysis/analysis.service';
+import { AnalysisController } from './companies/use-cases/analysis/analysis.controller';
 
 @Module({
   imports: [DatabaseModule, AccountModule],
-  controllers: [IndexCompaniesController, ShowCompaniesController, CreateCompanyController],
+  controllers: [ShowCompaniesController, CreateCompanyController, AnalysisController],
   providers: [IndexCompaniesService, ShowCompaniesService, CompanyRepo,
-    { provide: 'ICompanyRepo', useExisting: CompanyRepo }, CreateCompanyService, CreateAccountService],
+    { provide: 'ICompanyRepo', useExisting: CompanyRepo }, CreateCompanyService, CreateAccountService, AnalysisService],
 })
 export class CompaniesModule { }

@@ -7,6 +7,9 @@ export type AccountDto = {
   username: string
   email: string
   status: boolean
-  company: CompanyDto
+  company: {
+    id: string;
+    company_name: string;
+  }
 
 }

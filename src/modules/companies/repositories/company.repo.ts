@@ -12,14 +12,20 @@ export class CompanyRepo implements ICompanyRepo {
   async findAll(): Promise<{ total: number; data: Company[]; }> {
     const [total, data] = await this.prisma.$transaction([
       this.prisma.company.count(),
-      this.prisma.company.findMany(),
+      this.prisma.company.findMany({
+        include: {
+          logs: true,
+          vehicles: true,
+          accounts: true
+        }
+      }),
     ])
     return { total, data: data.map((c) => CompanyMapper.toDomain(c)) }
   }
   async findById(id: string): Promise<Company> {
     const company = await this.prisma.company.findUnique({
       where: { id },
-      include: { vehicles: true }
+      include: { vehicles: true, accounts: true, logs: true }
     })
     if (!company) {
       return
@@ -43,6 +49,8 @@ export class CompanyRepo implements ICompanyRepo {
         },
         include: {
           accounts: true,
+          vehicles: true,
+          logs: true
         },
       });
       return CompanyMapper.toDomain(result);
