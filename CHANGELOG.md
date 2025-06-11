@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/emanuellimamaia/fulog/compare/v1.0.0...v1.1.0) (2025-06-11)
+
+
+### Features
+
+* analysis ([76d4b09](https://github.com/emanuellimamaia/fulog/commit/76d4b09cc08de3502c1b7942e92f593b7e0eaad8))
+
 # 1.0.0 (2025-06-03)
 
 
