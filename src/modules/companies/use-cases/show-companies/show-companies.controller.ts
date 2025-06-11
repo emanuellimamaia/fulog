@@ -1,20 +1,26 @@
-import { Controller, Get, NotFoundException, Param } from "@nestjs/common";
+import { Controller, Get, NotFoundException, Param, Req, UseGuards } from "@nestjs/common";
 import { ShowCompaniesService } from "./show-companies.service";
-import { ApiTags } from "@nestjs/swagger";
+import { ApiBearerAuth, ApiTags } from "@nestjs/swagger";
 import { CompanyMapper } from "../../mappers/company.mappers";
+import { JwtAuthGuard } from "src/modules/auth/jwt.guard";
 
-@ApiTags('Companies')
-@Controller('/companies')
+@ApiTags('Company')
+@Controller('/company')
 export class ShowCompaniesController {
   constructor(
     private readonly showCompaniesService: ShowCompaniesService
   ) { }
 
-  @Get('/:id')
+
+  @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth()
+  @Get('')
   async handle(
-    @Param('id') id: string
+    @Req() req
   ) {
-    const result = await this.showCompaniesService.execute({ id })
+
+    const companyId = req.user.company.id
+    const result = await this.showCompaniesService.execute({ id: companyId })
     switch (result.message) {
       case 'empresa encontrada':
         return { ...result, data: CompanyMapper.toDto(result.data) }

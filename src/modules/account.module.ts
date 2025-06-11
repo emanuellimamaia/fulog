@@ -18,9 +18,7 @@ import { AuthController } from "./auth/auth.controller";
 import { JWT_SECRET } from "src/shared/global.constants";
 import { ChangeStatusAccountService } from './account/use-cases/change-status-account/change-status-account.service';
 import { ChangeStatusAccountController } from './account/use-cases/change-status-account/change-status-account.controller';
-import { FinishLogService } from './log/use-cases/finish-log/finish-log.service';
-import { FinishLogController } from './log/use-cases/finish-log/finish-log.controller';
-import { UpdateKilometersService } from './vehicle/use-cases/update-kilometers/update-kilometers.service';
+
 
 
 
@@ -40,7 +38,7 @@ import { UpdateKilometersService } from './vehicle/use-cases/update-kilometers/u
     ShowAccountsController,
     CreateAccountController,
     GetMeController,
-    ChangeStatusAccountController
+    ChangeStatusAccountController,
   ],
   providers: [
     AuthService,
