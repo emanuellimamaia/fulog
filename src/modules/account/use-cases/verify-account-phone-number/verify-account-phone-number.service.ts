@@ -10,6 +10,14 @@ export class VerifyAccountPhoneNumberService {
   ) { }
   async execute(phoneNumber: string) {
     const result = await this.accountRepo.verifyPhoneNumber(phoneNumber)
-    return AccountMapper.toDto(result)
+    const account = AccountMapper.toDto(result)
+    const log = account.logs[account.logs.length - 1]
+    return {
+      id: account.id,
+      username: account.username,
+      email: account.email,
+      phoneNumber: account.phone_number,
+      log: log
+    }
   }
 }
