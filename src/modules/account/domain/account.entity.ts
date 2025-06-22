@@ -1,16 +1,20 @@
 import { Company } from "src/modules/companies/domain/company.entity"
 import { Entity, EntityMetadata } from "src/shared/entity"
 import * as bcrypt from 'bcrypt';
+import { Log } from "src/modules/log/domain/logs.entity";
 
 type AccountProps = {
   id?: string,
   companyId?: string,
+  logId?: string
+  logs?: Log[]
   company?: Company
   username: string
   status?: boolean
   role?: string
   email: string
   password: string
+  phoneNumber?: string
 }
 
 export class
@@ -28,6 +32,13 @@ export class
   get company() {
     return this.props.company
   }
+  get logId() {
+    return this.props.logId
+  }
+  get logs() {
+    return this.props.logs
+  }
+
   get role() {
     return this.props.role
   }
@@ -52,7 +63,9 @@ export class
   get password() {
     return this.props.password;
   }
-
+  get phoneNumber() {
+    return this.props.phoneNumber
+  }
   set password(password: string) {
     this.props.password = bcrypt.hashSync(password, 10);
   }
