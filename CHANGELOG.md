@@ -1,3 +1,15 @@
+# [1.2.0](https://github.com/emanuellimamaia/fulog/compare/v1.1.0...v1.2.0) (2025-06-22)
+
+
+### Bug Fixes
+
+* verify phoneNumber ([f3ea2e5](https://github.com/emanuellimamaia/fulog/commit/f3ea2e585121828a79c4935155150113540b6344))
+
+
+### Features
+
+* verify phoneNumber ([fa148f2](https://github.com/emanuellimamaia/fulog/commit/fa148f21898d8890b4c97d9d406429b57aa2f5a8))
+
 # [1.1.0](https://github.com/emanuellimamaia/fulog/compare/v1.0.0...v1.1.0) (2025-06-11)
 
 
