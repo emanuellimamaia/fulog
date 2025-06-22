@@ -6,4 +6,5 @@ export interface IAccountRepo {
   create(account: Account): Promise<Account>
   findByEmail(email: string): Promise<Account>
   changeStatus(id: string, status: boolean)
+  verifyPhoneNumber(phoneNumber: string): Promise<Account>
 }

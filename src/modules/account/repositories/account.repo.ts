@@ -25,13 +25,24 @@ export class AccountRepo implements IAccountRepo {
     }
     return AccountMapper.toDomain(account);
   }
+  async verifyPhoneNumber(phoneNumber: string): Promise<Account> {
+
+    const account = await this.prisma.account.findUnique({
+      where: { phoneNumber },
+      include: { company: true, logs: true },
+    });
+    if (!account) {
+      throw new NotFoundException('Conta não encontrada.');
+    }
+    return AccountMapper.toDomain(account);
+  }
   async findByEmail(email: string): Promise<Account> {
     const account = await this.prisma.account.findUnique({
       where: { email },
-      include: { company: true }
+      include: { company: true },
     })
     if (!account) {
-      return
+      throw new NotFoundException('Conta não encontrada.');
     }
     return AccountMapper.toDomain(account);
   }

@@ -20,17 +20,18 @@ model Company {
 }
 
 model Account {
-  id         String   @id @default(cuid())
-  company_id String
-  username   String
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
-  email      String?  @unique
-  password   String?
-  role       String
-  status     Boolean  @default(true)
-  company    Company  @relation(fields: [company_id], references: [id])
-  Log        Log[]
+  id          String   @id @default(cuid())
+  company_id  String
+  username    String
+  created_at  DateTime @default(now())
+  updated_at  DateTime @updatedAt
+  email       String?  @unique
+  password    String?
+  role        String
+  phoneNumber String?  @unique
+  status      Boolean  @default(true)
+  company     Company  @relation(fields: [company_id], references: [id])
+  logs        Log[]
 
   @@map("accounts")
 }
@@ -73,6 +74,7 @@ model Log {
   id                 String    @id @default(cuid())
   company_id         String
   vehicle_id         String
+  account_id         String
   initial_kilometers Int
   progress           String    @default("Em progresso")
   final_kilometers   Int?
@@ -80,7 +82,6 @@ model Log {
   notes              String?
   created_at         DateTime  @default(now())
   updated_at         DateTime  @updatedAt
-  account_id         String
   deleted_at         DateTime?
   account            Account   @relation(fields: [account_id], references: [id])
   company            Company   @relation(fields: [company_id], references: [id])

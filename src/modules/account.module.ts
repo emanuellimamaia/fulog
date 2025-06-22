@@ -18,6 +18,9 @@ import { AuthController } from "./auth/auth.controller";
 import { JWT_SECRET } from "src/shared/global.constants";
 import { ChangeStatusAccountService } from './account/use-cases/change-status-account/change-status-account.service';
 import { ChangeStatusAccountController } from './account/use-cases/change-status-account/change-status-account.controller';
+import { VerifyAccountPhoneNumberController } from "./account/use-cases/verify-account-phone-number/verify-account-phone-number.controller";
+import { VerifyAccountPhoneNumberService } from './account/use-cases/verify-account-phone-number/verify-account-phone-number.service';
+
 
 
 
@@ -39,6 +42,7 @@ import { ChangeStatusAccountController } from './account/use-cases/change-status
     CreateAccountController,
     GetMeController,
     ChangeStatusAccountController,
+    VerifyAccountPhoneNumberController,
   ],
   providers: [
     AuthService,
@@ -52,6 +56,7 @@ import { ChangeStatusAccountController } from './account/use-cases/change-status
     AccountRepo,
     { provide: 'IAccountRepo', useExisting: AccountRepo },
     ChangeStatusAccountService,
+    VerifyAccountPhoneNumberService,
   ],
   exports: ['IAccountRepo', GetByEmailService, CreateAccountService],
 })
