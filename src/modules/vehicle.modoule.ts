@@ -9,13 +9,16 @@ import { ShowVehiclesService } from "./vehicle/use-cases/show-vehicles/show-vehi
 import { ShowVehicleController } from "./vehicle/use-cases/show-vehicles/show-vehicles.controller";
 import { ChangeAvailabilityVehicleService } from "./vehicle/use-cases/change-availability-vehicle/change-availability-vehicle.service";
 import { UpdateKilometersService } from "./vehicle/use-cases/update-kilometers/update-kilometers.service";
-import { CreateMaintenanceController } from "./vehicle/use-cases/create-maintenance/create-maintenance.controller";
-import { CreateMaintenanceService } from "./vehicle/use-cases/create-maintenance/create-maintenance.service";
-import { MaintenanceRepo } from "./vehicle/repositories/maintenance-repo";
+
+import { MaintenanceRepo } from "./maintenance/repositories/maintenance-repo";
+import { CreateMaintenanceController } from "./maintenance/use-cases/create-maintenance/create-maintenance.controller";
+import { CreateMaintenanceService } from "./maintenance/use-cases/create-maintenance/create-maintenance.service";
+import { GetVehicleMaintenancesController } from "./maintenance/use-cases/get-vehicle-maintenances/get-vehicle-maintenances.controller";
+import { GetVehicleMaintenancesService } from "./maintenance/use-cases/get-vehicle-maintenances/get-vehicle-maintenances.service";
 
 @Module({
   imports: [DatabaseModule],
-  controllers: [IndexVehicleController, CreateVehiclesController, ShowVehicleController, CreateMaintenanceController],
+  controllers: [IndexVehicleController, CreateVehiclesController, ShowVehicleController, CreateMaintenanceController, GetVehicleMaintenancesController],
   providers: [
     IndexVehiclesService,
     VehicleRepo,
@@ -26,7 +29,8 @@ import { MaintenanceRepo } from "./vehicle/repositories/maintenance-repo";
     ShowVehiclesService,
     ChangeAvailabilityVehicleService,
     UpdateKilometersService,
-    CreateMaintenanceService
+    CreateMaintenanceService,
+    GetVehicleMaintenancesService
   ],
   exports: ['IVehicleRepo', 'IMaintenance', ShowVehiclesService, ChangeAvailabilityVehicleService, UpdateKilometersService]
 })

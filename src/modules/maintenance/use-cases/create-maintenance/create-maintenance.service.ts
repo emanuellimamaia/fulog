@@ -1,8 +1,11 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { IMaintenanceRepo } from '../../repositories/maintenance-repo.interface';
 import { CreateMaintenanceDto } from '../../dto/create-maintenance.dto';
-import { MainTenance } from '../../domain/maintenance.entity';
+
+import { MainTenance } from 'src/modules/maintenance/domain/maintenance.entity';
+import { IMaintenanceRepo } from '../../repositories/maintenance-repo.interface';
 import { MaintenanceMappper } from '../../mappers/maintenance-mappers';
+
+
 
 interface InputProps extends CreateMaintenanceDto {
   vehicleId: string

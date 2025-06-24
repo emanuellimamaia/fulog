@@ -21,6 +21,7 @@ import { ChangeStatusAccountController } from './account/use-cases/change-status
 import { VerifyAccountPhoneNumberController } from "./account/use-cases/verify-account-phone-number/verify-account-phone-number.controller";
 import { VerifyAccountPhoneNumberService } from './account/use-cases/verify-account-phone-number/verify-account-phone-number.service';
 
+
 @Module({
   imports: [
     DatabaseModule,
@@ -38,6 +39,7 @@ import { VerifyAccountPhoneNumberService } from './account/use-cases/verify-acco
     GetMeController,
     ChangeStatusAccountController,
     VerifyAccountPhoneNumberController,
+
   ],
   providers: [
     AuthService,

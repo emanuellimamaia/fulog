@@ -1,7 +1,8 @@
 import { Maintenance as MaintenanceClient, Vehicle as VehicleClient } from "@prisma/client";
 import { MainTenance } from "../domain/maintenance.entity";
-import { MaintenanceDto } from "../dto/maintenance.dto";
-import { VehicleMapper } from "./vehicle-mappers";
+import { MaintenanceDto } from "src/modules/vehicle/dto/maintenance.dto";
+import { VehicleMapper } from "src/modules/vehicle/mappers/vehicle-mappers";
+
 
 export class MaintenanceMappper {
   static toDomain(raw: MaintenanceClient & { vehicle?: VehicleClient }): MainTenance {
