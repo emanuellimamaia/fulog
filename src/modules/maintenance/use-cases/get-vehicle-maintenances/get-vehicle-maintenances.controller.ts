@@ -3,7 +3,7 @@ import { GetVehicleMaintenancesService } from './get-vehicle-maintenances.servic
 import { ApiTags } from '@nestjs/swagger';
 
 @ApiTags("Maintenance")
-@Controller('maintenance/vehicle')
+@Controller('maintenance')
 export class GetVehicleMaintenancesController {
   constructor(private readonly getVehicleMaintenancesService: GetVehicleMaintenancesService) { }
 
