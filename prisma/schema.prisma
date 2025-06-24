@@ -46,6 +46,7 @@ model Vehicle {
   license_plate String
   year          Int
   type_of_fuel  String
+  maintenance   Maintenance[]
   status        Boolean        @default(true)
   created_at    DateTime       @default(now())
   updated_at    DateTime       @updatedAt
@@ -54,6 +55,16 @@ model Vehicle {
   fuelExpense   FuelExpenses[]
 
   @@map("vehicles")
+}
+
+model Maintenance {
+  id         String   @id @default(cuid())
+  name       String
+  value      Int
+  date       DateTime
+  created_at DateTime @default(now())
+  Vehicle    Vehicle? @relation(fields: [vehicleId], references: [id])
+  vehicleId  String?
 }
 
 model FuelExpenses {

@@ -9,12 +9,25 @@ import { ShowVehiclesService } from "./vehicle/use-cases/show-vehicles/show-vehi
 import { ShowVehicleController } from "./vehicle/use-cases/show-vehicles/show-vehicles.controller";
 import { ChangeAvailabilityVehicleService } from "./vehicle/use-cases/change-availability-vehicle/change-availability-vehicle.service";
 import { UpdateKilometersService } from "./vehicle/use-cases/update-kilometers/update-kilometers.service";
+import { CreateMaintenanceController } from "./vehicle/use-cases/create-maintenance/create-maintenance.controller";
+import { CreateMaintenanceService } from "./vehicle/use-cases/create-maintenance/create-maintenance.service";
+import { MaintenanceRepo } from "./vehicle/repositories/maintenance-repo";
 
 @Module({
   imports: [DatabaseModule],
-  controllers: [IndexVehicleController, CreateVehiclesController, ShowVehicleController],
-  providers: [IndexVehiclesService, VehicleRepo, { provide: 'IVehicleRepo', useExisting: VehicleRepo }, CreateVehicleService, ShowVehiclesService, ChangeAvailabilityVehicleService, UpdateKilometersService],
-  exports: ['IVehicleRepo', ShowVehiclesService, ChangeAvailabilityVehicleService, UpdateKilometersService]
+  controllers: [IndexVehicleController, CreateVehiclesController, ShowVehicleController, CreateMaintenanceController],
+  providers: [
+    IndexVehiclesService,
+    VehicleRepo,
+    MaintenanceRepo,
+    { provide: 'IVehicleRepo', useExisting: VehicleRepo },
+    { provide: 'IMaintenance', useExisting: MaintenanceRepo },
+    CreateVehicleService,
+    ShowVehiclesService,
+    ChangeAvailabilityVehicleService,
+    UpdateKilometersService,
+    CreateMaintenanceService
+  ],
+  exports: ['IVehicleRepo', 'IMaintenance', ShowVehiclesService, ChangeAvailabilityVehicleService, UpdateKilometersService]
 })
-
 export class VehicelModule { }

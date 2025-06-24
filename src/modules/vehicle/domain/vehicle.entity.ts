@@ -1,6 +1,7 @@
 
 import { Company } from "src/modules/companies/domain/company.entity"
 import { FuelExpenses } from "src/modules/fuel-expenses/domain/fuel-expenses.entity"
+import { MainTenance } from "src/modules/vehicle/domain/maintenance.entity"
 
 import { Log } from "src/modules/log/domain/logs.entity"
 import { Entity, EntityMetadata } from "src/shared/entity"
@@ -20,6 +21,7 @@ interface VehicleProps {
   company?: Company
   log?: Log[]
   fuelExpenses?: FuelExpenses[]
+  maintenance?: MainTenance[]
 }
 
 export class Vehicle extends Entity<VehicleProps> {
@@ -41,7 +43,6 @@ export class Vehicle extends Entity<VehicleProps> {
   get company() {
     return this.props.company
   }
-
 
   get status() {
     return this.props.status
