@@ -1,3 +1,10 @@
+## [1.4.1](https://github.com/emanuellimamaia/fulog/compare/v1.4.0...v1.4.1) (2025-06-24)
+
+
+### Bug Fixes
+
+* maintenance ([9ff9863](https://github.com/emanuellimamaia/fulog/commit/9ff9863fb93ed586a1117f37f2ecb5106253a871))
+
 # [1.4.0](https://github.com/emanuellimamaia/fulog/compare/v1.3.0...v1.4.0) (2025-06-24)
 
 
