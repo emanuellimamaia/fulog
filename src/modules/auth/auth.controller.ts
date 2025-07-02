@@ -11,7 +11,7 @@ export class AuthController {
 
   @ApiExtraModels(AuthUserDto)
   @UseGuards(AuthGuard('local'))
-  @Post('login-user')
+  @Post('login')
   async handle(@Request() req, @Body() data: AuthUserDto) {
     try {
       const { id, role, username } = req.user;
