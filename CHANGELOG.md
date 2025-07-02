@@ -1,3 +1,10 @@
+## [1.4.2](https://github.com/emanuellimamaia/fulog/compare/v1.4.1...v1.4.2) (2025-07-02)
+
+
+### Bug Fixes
+
+* controller login ([d83f5ab](https://github.com/emanuellimamaia/fulog/commit/d83f5abca7189052ef9678e2b69ac8449c933f6a))
+
 ## [1.4.1](https://github.com/emanuellimamaia/fulog/compare/v1.4.0...v1.4.1) (2025-06-24)
 
 
