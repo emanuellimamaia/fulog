@@ -3,7 +3,7 @@ import { AuthService } from './auth.service';
 import { ApiExtraModels, ApiTags } from '@nestjs/swagger';
 import { AuthUserDto } from './auth-user.dto';
 import { AuthGuard } from '@nestjs/passport';
-@ApiTags('login')
+@ApiTags('Login')
 @Controller('auth')
 export class AuthController {
 
